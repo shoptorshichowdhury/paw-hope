@@ -9,12 +9,20 @@ import logo from "../../../assets/icons/smallicon.png";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/mode-toggle";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@radix-ui/react-dropdown-menu";
+import { NavLink } from "react-router-dom";
+import "./Navbar.css";
 
 const Navbar = () => {
   const [isMobileMenu, setIsMobileMenu] = useState(false);
-
+  const user = false;
   return (
-    <div className="sticky top-0 bg-opacity-45 backdrop-blur-lg border border-b-slate-300/30">
+    <div className="sticky top-0 bg-opacity-45 backdrop-blur-lg border border-b-slate-300/30 dark:border-b-slate-50/10">
       <nav className="py-3 w-11/12 mx-auto flex justify-between items-center">
         {/* logo */}
         <div className="flex items-end gap-2">
@@ -35,18 +43,24 @@ const Navbar = () => {
           <NavigationMenu>
             <NavigationMenuList className="hidden md:flex space-x-6">
               <NavigationMenuItem>
-                <NavigationMenuLink href="/" className="hover:underline">
-                  Home
+                <NavigationMenuLink asChild>
+                  <NavLink to="/" className="hover:underline">
+                    Home
+                  </NavLink>
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <NavigationMenuLink href="/about" className="hover:underline">
-                  About
+                <NavigationMenuLink asChild>
+                  <NavLink to="/" className="hover:underline">
+                    Pet Listing
+                  </NavLink>
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <NavigationMenuLink href="/contact" className="hover:underline">
-                  Contact
+                <NavigationMenuLink asChild>
+                  <NavLink to="/" className="hover:underline">
+                    Donation Campaigns
+                  </NavLink>
                 </NavigationMenuLink>
               </NavigationMenuItem>
             </NavigationMenuList>
@@ -62,37 +76,62 @@ const Navbar = () => {
           </button>
           {/* menu navbar mobile */}
           {isMobileMenu && (
-            <div className="md:hidden bg-white border rounded-lg absolute px-6 top-11 left-2 z-50">
+            <div className="md:hidden bg-[#FFF5E1] dark:bg-[#2C3E50] border rounded-lg absolute px-6 top-11 left-2 z-50">
               <NavigationMenu>
-                <NavigationMenuList className="flex flex-col items-end space-y-2 py-4 text-sm font-medium">
+                <NavigationMenuList align='start' className="flex flex-col items-start space-y-2 py-4 text-sm font-medium">
                   <NavigationMenuItem>
-                    <NavigationMenuLink href="/" className="hover:underline">
-                      Home
+                    <NavigationMenuLink asChild>
+                      <NavLink to="/" className="hover:underline">
+                        Home
+                      </NavLink>
                     </NavigationMenuLink>
                   </NavigationMenuItem>
-                  <NavigationMenuItem>
-                    <NavigationMenuLink
-                      href="/about"
-                      className="hover:underline"
-                    >
-                      About
-                    </NavigationMenuLink>
-                  </NavigationMenuItem>
-                  <NavigationMenuItem>
-                    <NavigationMenuLink
-                      href="/contact"
-                      className="hover:underline"
-                    >
-                      Contact
-                    </NavigationMenuLink>
-                  </NavigationMenuItem>
+                  <NavigationMenuLink asChild>
+                    <NavLink to="/" className="hover:underline">
+                      Pet Listing
+                    </NavLink>
+                  </NavigationMenuLink>
+                  <NavigationMenuLink asChild>
+                    <NavLink to="/" className="hover:underline">
+                      Donation Campaigns
+                    </NavLink>
+                  </NavigationMenuLink>
                 </NavigationMenuList>
               </NavigationMenu>
             </div>
           )}
 
+          {/* login button & user profile */}
           {/* login button */}
-          <Button variant={`primary`}>Login</Button>
+          {user && <Button variant={`primary`}>Login</Button>}
+
+          {/* user profile icon with dropdown menu*/}
+          {!user && (
+            <DropdownMenu className="bg-[#FFF5E1] dark:bg-[#2C3E50] shadow-md p-2 space-y-2">
+              <DropdownMenuTrigger asChild>
+                <Button variant={`outline`} size="icon">
+                  <div className="h-10 w-10 rounded-full">
+                    <img
+                      className="w-full h-full object-cover rounded-full"
+                      src={logo}
+                      alt="profile"
+                    />
+                  </div>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                align="end"
+                className="bg-[#FFF5E1] dark:bg-[#2C3E50] shadow-md rounded-md p-2"
+              >
+                <DropdownMenuItem className="focus:outline-none">
+                  <Button variant="link">Dashboard</Button>
+                </DropdownMenuItem>
+                <DropdownMenuItem className="focus:outline-none">
+                  <Button variant="link">LogOut</Button>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
 
           {/* theme toggle */}
           <ModeToggle></ModeToggle>
