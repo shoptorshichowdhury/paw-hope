@@ -22,7 +22,7 @@ const Navbar = () => {
   const [isMobileMenu, setIsMobileMenu] = useState(false);
   const user = false;
   return (
-    <div className="sticky top-0 bg-opacity-45 backdrop-blur-lg border border-b-slate-300/30 dark:border-b-slate-50/10">
+    <div className="sticky top-0 bg-opacity-90 backdrop-blur-md border border-b-slate-300/30 dark:border-b-slate-50/10">
       <nav className="py-3 w-11/12 mx-auto flex justify-between items-center">
         {/* logo */}
         <div className="flex items-end gap-2">

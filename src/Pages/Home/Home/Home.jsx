@@ -1,7 +1,9 @@
+import Banner from "../Banner/Banner";
+
 const Home = () => {
   return (
     <div>
-      <p className="font-poppins">Home page</p>
+      <Banner></Banner>
     </div>
   );
 };
