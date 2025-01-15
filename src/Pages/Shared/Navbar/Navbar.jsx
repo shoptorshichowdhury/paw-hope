@@ -15,7 +15,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@radix-ui/react-dropdown-menu";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -41,7 +41,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center gap-3 md:gap-10 relative">
           {/* navbar menu large screen */}
           <NavigationMenu>
-            <NavigationMenuList className="hidden md:flex space-x-6">
+            <NavigationMenuList className="hidden lg:flex space-x-6">
               <NavigationMenuItem>
                 <NavigationMenuLink asChild>
                   <NavLink to="/" className="hover:underline">
@@ -58,7 +58,7 @@ const Navbar = () => {
               </NavigationMenuItem>
               <NavigationMenuItem>
                 <NavigationMenuLink asChild>
-                  <NavLink to="/" className="hover:underline">
+                  <NavLink to="/donationCampaigns" className="hover:underline">
                     Donation Campaigns
                   </NavLink>
                 </NavigationMenuLink>
@@ -69,16 +69,19 @@ const Navbar = () => {
           {/* navbar menu small screen */}
           {/* hamburger icon */}
           <button
-            className="md:hidden p-1 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+            className="lg:hidden p-1 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
             onClick={() => setIsMobileMenu(!isMobileMenu)}
           >
             <HiMenuAlt3 className="text-xl" />
           </button>
           {/* menu navbar mobile */}
           {isMobileMenu && (
-            <div className="md:hidden bg-[#FFF5E1] dark:bg-[#2C3E50] border rounded-lg absolute px-6 top-11 left-2 z-50">
+            <div className="lg:hidden bg-[#FFF5E1] dark:bg-[#2C3E50] border rounded-lg absolute px-6 top-11 left-2 z-50">
               <NavigationMenu>
-                <NavigationMenuList align='start' className="flex flex-col items-start space-y-2 py-4 text-sm font-medium">
+                <NavigationMenuList
+                  align="start"
+                  className="flex flex-col items-start space-y-2 py-4 text-sm font-medium"
+                >
                   <NavigationMenuItem>
                     <NavigationMenuLink asChild>
                       <NavLink to="/" className="hover:underline">
@@ -92,7 +95,10 @@ const Navbar = () => {
                     </NavLink>
                   </NavigationMenuLink>
                   <NavigationMenuLink asChild>
-                    <NavLink to="/" className="hover:underline">
+                    <NavLink
+                      to="/donationCampaigns"
+                      className="hover:underline"
+                    >
                       Donation Campaigns
                     </NavLink>
                   </NavigationMenuLink>
@@ -103,10 +109,14 @@ const Navbar = () => {
 
           {/* login button & user profile */}
           {/* login button */}
-          {user && <Button variant={`primary`}>Login</Button>}
+          {!user && (
+            <Link to='/authentication/login'>
+              <Button variant={`primary`}>Login</Button>
+            </Link>
+          )}
 
           {/* user profile icon with dropdown menu*/}
-          {!user && (
+          {user && (
             <DropdownMenu className="bg-[#FFF5E1] dark:bg-[#2C3E50] shadow-md p-2 space-y-2">
               <DropdownMenuTrigger asChild>
                 <Button variant={`outline`} size="icon">
