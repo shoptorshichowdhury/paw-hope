@@ -51,7 +51,7 @@ const Navbar = () => {
               </NavigationMenuItem>
               <NavigationMenuItem>
                 <NavigationMenuLink asChild>
-                  <NavLink to="/" className="hover:underline">
+                  <NavLink to="/petListing" className="hover:underline">
                     Pet Listing
                   </NavLink>
                 </NavigationMenuLink>
@@ -87,7 +87,7 @@ const Navbar = () => {
                     </NavigationMenuLink>
                   </NavigationMenuItem>
                   <NavigationMenuLink asChild>
-                    <NavLink to="/" className="hover:underline">
+                    <NavLink to="/petListing" className="hover:underline">
                       Pet Listing
                     </NavLink>
                   </NavigationMenuLink>

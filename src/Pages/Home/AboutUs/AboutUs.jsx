@@ -29,15 +29,15 @@ const AboutUs = () => {
           </p>
           <p className="text-xl font-medium">We aim to -</p>
           <div className="lg:w-11/12 space-y-2">
-            <li className="px-4 py-3 bg-primaryPink/10 list-disc border border-primaryPink rounded-2xl">
+            <li className="px-4 py-3 bg-primaryBlue/10 list-disc border border-primaryBlue/30 rounded-xl">
               <span className="font-medium">Facilitate Adoptions: </span>
               Helping pets find their perfect families.
             </li>
-            <li className="px-4 py-3 bg-primaryPink/10 list-disc border border-primaryPink rounded-2xl">
+            <li className="px-4 py-3 bg-primaryBlue/10 list-disc border border-primaryBlue/30 rounded-xl">
               <span className="font-medium">Promote Animal Welfare: </span>
               Advocating for better lives for pets in need.
             </li>
-            <li className="px-4 py-3 bg-primaryPink/10 list-disc border border-primaryPink rounded-2xl">
+            <li className="px-4 py-3 bg-primaryBlue/10 list-disc border border-primaryBlue/30 rounded-xl">
               <span className="font-medium">Support through Donations: </span>
               Providing care and resources for pets in need.
             </li>
