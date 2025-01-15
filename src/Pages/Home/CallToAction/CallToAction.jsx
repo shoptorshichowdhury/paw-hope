@@ -8,7 +8,7 @@ const CallToAction = () => {
     <section className="mt-12 w-11/12 mx-auto md:py-10">
       <div className="flex flex-col md:flex-row items-center gap-10 md:gap-0">
         {/* image section */}
-        <div className="md:w-1/2 relative">
+        <div className="md:w-1/2 relative z-10">
           <div className="w-[250px] h-[300px] md:w-[300px] md:h-[400px] lg:w-[420px] lg:h-[500px] pt-1 pl-1 rounded-2xl bg-primaryBlue">
             <img
               className="w-full h-full object-cover rounded-2xl object-left"
@@ -32,7 +32,7 @@ const CallToAction = () => {
           <h3 className="text-base md:text-2xl lg:text-4xl font-semibold">
             Open Your Heart, Find Your Perfect Companion Today!
           </h3>
-          <p className="w-4/5 text-sm md:text-base">
+          <p className="md:w-4/5 text-sm md:text-base">
             Every pet deserves a chance at a happy and loving home. By adopting,
             you’re not just changing their life—you’re filling yours with
             unconditional love and companionship. Start the journey of giving
