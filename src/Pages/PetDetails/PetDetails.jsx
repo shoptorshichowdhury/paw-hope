@@ -1,3 +1,4 @@
+import AdoptFormButton from "@/components/common/AdoptFormButton/AdoptFormButton";
 import petImg from "../../assets/pet-details/dog.jpg";
 import { Button } from "@/components/ui/button";
 
@@ -73,7 +74,7 @@ const PetDetails = () => {
               Quibusdam perspiciatis optio similique veniam.
             </p>
           </div>
-          <Button variant={`primary`}>Adopt Now</Button>
+          <AdoptFormButton></AdoptFormButton>
         </div>
       </div>
     </div>
