@@ -1,5 +1,6 @@
 import Main from "@/Layouts/Main";
 import DonationCampaigns from "@/Pages/DonationCampaigns/DonationCampaigns";
+import DonationDetails from "@/Pages/DonationDetails/DonationDetails";
 import Home from "@/Pages/Home/Home/Home";
 import Login from "@/Pages/Login/Login";
 import PetDetails from "@/Pages/PetDetails/PetDetails";
@@ -24,6 +25,10 @@ export const router = createBrowserRouter([
       {
         path: "/petDetails",
         element: <PetDetails />,
+      },
+      {
+        path: "/donationDetails",
+        element: <DonationDetails />,
       },
       {
         path: "/donationCampaigns",

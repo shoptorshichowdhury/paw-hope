@@ -1,21 +1,22 @@
-import AdoptFormButton from "@/components/common/AdoptFormButton/AdoptFormButton";
+import { Button } from "@/components/ui/button";
 import petImg from "../../assets/pet-details/dog.jpg";
+import DonationPetCard from "@/components/common/DonationPetCard/DonationPetCard";
 
-const PetDetails = () => {
+const DonationDetails = () => {
   return (
     <div className="w-11/12 mx-auto my-12">
       <div className="text-xl md:text-2xl lg:text-5xl font-semibold mb-5 md:mb-10 lg:mb-16 px-6 py-4 bg-primaryPink/20 rounded-xl flex justify-center items-center">
-        Pet Details
+        Donation Details
       </div>
 
       {/* Pet details section */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 bg-white dark:bg-[#2C3E50] p-5 md:p-8 lg:p-12 rounded-2xl">
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-10 bg-white dark:bg-[#2C3E50] p-5 md:p-8 lg:p-12 rounded-2xl">
         {/* -----1st part------- */}
         <div className="space-y-5">
-          {/* name & short description */}
-          <div className="space-y-3">
-            <h3 className="text-lg md:text-2xl lg:text-4xl font-semibold">
-              Siberian Husky
+          {/* short description */}
+          <div className="space-y-5">
+            <h3 className="text-lg md:text-2xl lg:text-4xl font-semibold text-primaryPink">
+              Donate Something!
             </h3>
             <p className="text-sm lg:text-base text-justify font-light">
               The domestic dog is a doiated dendant of the wolf. The dog t is
@@ -26,6 +27,7 @@ const PetDetails = () => {
               weeks old.
             </p>
           </div>
+
           {/* pet image */}
           <div className="h-[250px] md:h-[350px] lg:h-[480px]">
             <img
@@ -38,21 +40,21 @@ const PetDetails = () => {
 
         {/* ------2nd part------ */}
         <div className="space-y-5">
-          {/* pet information */}
+          {/* donation information */}
           <div className="space-y-3">
             <p className="text-lg md:text-xl lg:text-2xl font-medium">
-              Pet Information:
+              Donation Information:
             </p>
             <div className="flex items-center gap-5">
-              <div className="text-sm font-medium">
-                <p>Age:</p>
-                <p>Category:</p>
-                <p>Location:</p>
+              <div className="text-sm font-medium space-y-2">
+                <p>Maximum Donation Amount:</p>
+                <p>Donated Amount:</p>
+                <p>Last Date of Donation:</p>
               </div>
-              <div className="text-sm">
-                <p>3 Year</p>
-                <p>Dog</p>
-                <p>Mirpur, Dhaka</p>
+              <div className="text-sm space-y-2">
+                <p>$30</p>
+                <p>$200</p>
+                <p>20 January, 2025</p>
               </div>
             </div>
           </div>
@@ -73,11 +75,23 @@ const PetDetails = () => {
               Quibusdam perspiciatis optio similique veniam.
             </p>
           </div>
-          <AdoptFormButton></AdoptFormButton>
+          <Button>Donate Now</Button>
         </div>
-      </div>
+      </section>
+
+      {/* recommended donation section */}
+      <section className="my-12">
+        <div className="my-5 md:my-8 lg:my-10">
+            <p className="text-xl md:text-2xl lg:text-4xl font-medium">Recommended Campaigns</p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8 lg:gap-10">
+          <DonationPetCard />
+          <DonationPetCard />
+          <DonationPetCard />
+        </div>
+      </section>
     </div>
   );
 };
 
-export default PetDetails;
+export default DonationDetails;

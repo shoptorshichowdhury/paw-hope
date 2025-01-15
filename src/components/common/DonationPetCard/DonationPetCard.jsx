@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import dogImg from "../../../assets/pet-details/dog.jpg";
 import pawlogo from "../../../assets/home/about-us/about-icons/about-paw-big.png";
+import { Link } from "react-router-dom";
 
 const DonationPetCard = () => {
   return (
@@ -20,7 +21,11 @@ const DonationPetCard = () => {
         <p>
           <span className="font-semibold">Donated Amount:</span> $200
         </p>
-        <Button variant={`cardBtn`}>View Details</Button>
+        <div>
+          <Link to={`/donationDetails`}>
+            <Button variant={`cardBtn`}>View Details</Button>
+          </Link>
+        </div>
 
         {/* paw logo */}
         <div className="absolute -bottom-3 -right-3 -rotate-45 opacity-25">
