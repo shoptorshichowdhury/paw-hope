@@ -10,8 +10,17 @@ const PetListing = () => {
               them the forever home they deserve.`}
       />
 
-      {/* pet listing section */}
-      
+      {/* ----pet listing section---- */}
+
+      <div className="w-11/12 mx-auto">
+        {/* search bar & category select */}
+        <div>
+            
+        </div>
+
+        {/* main pet container */}
+        <div></div>
+      </div>
     </section>
   );
 };
