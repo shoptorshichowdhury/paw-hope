@@ -1,20 +1,86 @@
 import React from "react";
-
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { FaGithub, FaInstagram } from "react-icons/fa";
-import authImg from "../assets/authentication/auth.jpg"
-import { Link } from "react-router-dom";
+import { FaGithub, FaGoogle, FaInstagram, FaSpinner } from "react-icons/fa";
+import authImg from "../assets/authentication/auth.jpg";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import useAuth from "@/hooks/useAuth";
+import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
 export function LoginForm({ className, ...props }) {
+  const { loading, loginUser, setLoading, signInWithGoogle } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/";
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  //   Handle login
+  const onSubmit = async (data) => {
+    const email = data?.email;
+    const password = data?.password;
+
+    try {
+      await loginUser(email, password);
+      //show success message
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Login Successful!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      navigate(from, { replace: true });
+    } catch (err) {
+      console.log(err);
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: `${err?.code}`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      setLoading(false);
+    }
+  };
+
+  //Handle Google login
+  const handleGoogleLogin = async () => {
+    try {
+      await signInWithGoogle();
+      //show success message
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Login Successful!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      navigate(from, { replace: true });
+    } catch (err) {
+      console.log(err);
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: `${err?.code}`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+  };
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card className="overflow-hidden">
         <CardContent className="grid p-0 md:grid-cols-2">
-          <form className="p-6 md:p-8">
+          <form onSubmit={handleSubmit(onSubmit)} className="p-6 md:p-8">
             <div className="flex flex-col gap-6">
               <div className="flex flex-col items-center text-center">
                 <h1 className="text-2xl font-bold">Welcome back</h1>
@@ -29,8 +95,14 @@ export function LoginForm({ className, ...props }) {
                   type="email"
                   placeholder="m@example.com"
                   className="bg-white dark:bg-black"
+                  {...register("email", { required: true })}
                   required
                 />
+                {errors.email && (
+                  <p className="text-sm text-red-600">
+                    Email field is required.
+                  </p>
+                )}
               </div>
               <div className="grid gap-2">
                 <div className="flex items-center">
@@ -47,11 +119,16 @@ export function LoginForm({ className, ...props }) {
                   type="password"
                   placeholder="password"
                   className="bg-white dark:bg-black"
+                  {...register("password", { required: true })}
                   required
                 />
               </div>
               <Button variant={`primary`} type="submit" className="w-full">
-                Login
+                {loading ? (
+                  <FaSpinner className="animate-spin m-auto"></FaSpinner>
+                ) : (
+                  "Login"
+                )}
               </Button>
               {/* social login */}
               <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
@@ -59,7 +136,20 @@ export function LoginForm({ className, ...props }) {
                   Or continue with
                 </span>
               </div>
-              <Button variant="outline" className="w-full bg-white dark:bg-black">
+              <Button
+                onClick={handleGoogleLogin}
+                type="button"
+                variant="outline"
+                className="w-full bg-white dark:bg-black"
+              >
+                <FaGoogle />
+                Login with Google
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                className="w-full bg-white dark:bg-black"
+              >
                 <FaGithub />
                 Login with GitHub
               </Button>
@@ -67,7 +157,10 @@ export function LoginForm({ className, ...props }) {
               {/* register link*/}
               <div className="text-center text-sm">
                 Don&apos;t have an account?
-                <Link to={`/authentication/register`} className="underline underline-offset-4">
+                <Link
+                  to={`/authentication/register`}
+                  className="underline underline-offset-4"
+                >
                   Sign up
                 </Link>
               </div>
