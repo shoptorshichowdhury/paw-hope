@@ -1,3 +1,4 @@
+import Dashboard from "@/Layouts/Dashboard";
 import Main from "@/Layouts/Main";
 import DonationCampaigns from "@/Pages/DonationCampaigns/DonationCampaigns";
 import DonationDetails from "@/Pages/DonationDetails/DonationDetails";
@@ -49,5 +50,10 @@ export const router = createBrowserRouter([
         element: <Register></Register>,
       },
     ],
+  },
+  //   dashboard routes
+  {
+    path: "/dashboard",
+    element: <Dashboard></Dashboard>,
   },
 ]);

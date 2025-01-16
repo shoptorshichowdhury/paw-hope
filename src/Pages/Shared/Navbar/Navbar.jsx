@@ -140,7 +140,7 @@ const Navbar = () => {
                 className="bg-[#FFF5E1] dark:bg-[#2C3E50] shadow-md rounded-md p-2"
               >
                 <DropdownMenuItem className="focus:outline-none">
-                  <Button variant="link">Dashboard</Button>
+                  <Link to="/dashboard"><Button variant="link">Dashboard</Button></Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem className="focus:outline-none">
                   <Button onClick={logOut} variant="link">
