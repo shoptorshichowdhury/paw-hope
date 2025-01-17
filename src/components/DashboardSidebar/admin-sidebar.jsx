@@ -11,7 +11,8 @@ import {
   SidebarRail,
   SidebarSeparator,
 } from "@/components/ui/sidebar";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import "./DashboardSidebar.css";
 
 export function AdminSidebar({ ...props }) {
   return (
@@ -21,7 +22,7 @@ export function AdminSidebar({ ...props }) {
           Admin DashBoard
         </h3>
       </SidebarHeader>
-      <SidebarContent>
+      <SidebarContent className="sidebar">
         {/* additional users route */}
         <SidebarGroup>
           <SidebarGroupContent>
@@ -30,49 +31,49 @@ export function AdminSidebar({ ...props }) {
               {/* 1. add a pet */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <Link className="font-medium" to="/">
+                  <NavLink className="font-medium" to="/dashboard">
                     Add a Pet
-                  </Link>
+                  </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               {/* 2. my added pets */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <Link className="font-medium" to="/">
+                  <NavLink className="font-medium" to="/">
                     My added pets
-                  </Link>
+                  </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               {/* 3. adoption request */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <Link className="font-medium" to="/">
+                  <NavLink className="font-medium" to="/">
                     My added pets
-                  </Link>
+                  </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               {/* 4. create donation campaign */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <Link className="font-medium" to="/">
+                  <NavLink className="font-medium" to="/">
                     Create Donation Campaign
-                  </Link>
+                  </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               {/* 5. my donation campaigns */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <Link className="font-medium" to="/">
+                  <NavLink className="font-medium" to="/">
                     My Donation Campaigns
-                  </Link>
+                  </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               {/* 6. My donations */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <Link className="font-medium" to="/">
+                  <NavLink className="font-medium" to="/">
                     My Donations
-                  </Link>
+                  </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
@@ -89,25 +90,25 @@ export function AdminSidebar({ ...props }) {
               {/* 1. users */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <Link className="font-medium" to="/">
+                  <NavLink className="font-medium" to="/">
                     Users
-                  </Link>
+                  </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               {/* 2. All pets */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <Link className="font-medium" to="/">
+                  <NavLink className="font-medium" to="/">
                     All Pets
-                  </Link>
+                  </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               {/* 3. all donations */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <Link className="font-medium" to="/">
+                  <NavLink className="font-medium" to="/">
                     All Donations
-                  </Link>
+                  </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>

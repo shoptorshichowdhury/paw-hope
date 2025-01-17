@@ -1,5 +1,6 @@
 import Dashboard from "@/Layouts/Dashboard";
 import Main from "@/Layouts/Main";
+import AddPet from "@/Pages/AddPet/AddPet";
 import DonationCampaigns from "@/Pages/DonationCampaigns/DonationCampaigns";
 import DonationDetails from "@/Pages/DonationDetails/DonationDetails";
 import Home from "@/Pages/Home/Home/Home";
@@ -8,6 +9,7 @@ import PetDetails from "@/Pages/PetDetails/PetDetails";
 import PetListing from "@/Pages/PetListing/PetListing";
 import Register from "@/Pages/Register/Register";
 import { createBrowserRouter } from "react-router-dom";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -54,6 +56,21 @@ export const router = createBrowserRouter([
   //   dashboard routes
   {
     path: "/dashboard",
-    element: <Dashboard></Dashboard>,
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
+    children: [
+      // user routes
+      {
+        index: true,
+        element: (
+          <PrivateRoute>
+            <AddPet />
+          </PrivateRoute>
+        ),
+      },
+    ],
   },
 ]);

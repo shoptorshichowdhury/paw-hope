@@ -10,7 +10,8 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import "./DashboardSidebar.css"
 
 export function UserSidebar({ ...props }) {
   return (
@@ -20,7 +21,7 @@ export function UserSidebar({ ...props }) {
           User DashBoard
         </h3>
       </SidebarHeader>
-      <SidebarContent>
+      <SidebarContent className="sidebar">
         <SidebarGroup>
           <SidebarGroupContent>
             {/* all menu */}
@@ -28,49 +29,47 @@ export function UserSidebar({ ...props }) {
               {/* 1. add a pet */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <Link className="font-medium" to="/">
-                    Add a Pet
-                  </Link>
+                  <NavLink className="font-medium">Add a Pet</NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               {/* 2. my added pets */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <Link className="font-medium" to="/">
+                  <NavLink className="font-medium" to="/">
                     My added pets
-                  </Link>
+                  </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               {/* 3. adoption request */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <Link className="font-medium" to="/">
+                  <NavLink className="font-medium" to="/">
                     My added pets
-                  </Link>
+                  </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               {/* 4. create donation campaign */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <Link className="font-medium" to="/">
+                  <NavLink className="font-medium" to="/">
                     Create Donation Campaign
-                  </Link>
+                  </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               {/* 5. my donation campaigns */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <Link className="font-medium" to="/">
+                  <NavLink className="font-medium" to="/">
                     My Donation Campaigns
-                  </Link>
+                  </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               {/* 6. My donations */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <Link className="font-medium" to="/">
+                  <NavLink className="font-medium" to="/">
                     My Donations
-                  </Link>
+                  </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
