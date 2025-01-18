@@ -15,6 +15,7 @@ import { NavLink } from "react-router-dom";
 import "./DashboardSidebar.css";
 
 export function AdminSidebar({ ...props }) {
+
   return (
     <Sidebar {...props}>
       <SidebarHeader className="flex-row items-center justify-center md:py-5">
@@ -31,7 +32,7 @@ export function AdminSidebar({ ...props }) {
               {/* 1. add a pet */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <NavLink className="font-medium" to="/dashboard">
+                  <NavLink className="font-medium" to="/dashboard" end>
                     Add a Pet
                   </NavLink>
                 </SidebarMenuButton>
@@ -39,20 +40,12 @@ export function AdminSidebar({ ...props }) {
               {/* 2. my added pets */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <NavLink className="font-medium" to="/">
+                  <NavLink className="font-medium" to="/dashboard/myAddedPets">
                     My added pets
                   </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
-              {/* 3. adoption request */}
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <NavLink className="font-medium" to="/">
-                    My added pets
-                  </NavLink>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              {/* 4. create donation campaign */}
+              {/* 3. create donation campaign */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <NavLink className="font-medium" to="/">
@@ -60,7 +53,7 @@ export function AdminSidebar({ ...props }) {
                   </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
-              {/* 5. my donation campaigns */}
+              {/* 4. my donation campaigns */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <NavLink className="font-medium" to="/">
@@ -68,11 +61,19 @@ export function AdminSidebar({ ...props }) {
                   </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
-              {/* 6. My donations */}
+              {/* 5. My donations */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <NavLink className="font-medium" to="/">
                     My Donations
+                  </NavLink>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              {/* 6. donation request */}
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <NavLink className="font-medium" to="/">
+                    Donation Request
                   </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>

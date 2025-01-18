@@ -11,7 +11,7 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { NavLink } from "react-router-dom";
-import "./DashboardSidebar.css"
+import "./DashboardSidebar.css";
 
 export function UserSidebar({ ...props }) {
   return (
@@ -29,26 +29,20 @@ export function UserSidebar({ ...props }) {
               {/* 1. add a pet */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <NavLink className="font-medium">Add a Pet</NavLink>
+                  <NavLink className="font-medium" to="/dashboard" end>
+                    Add a Pet
+                  </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               {/* 2. my added pets */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <NavLink className="font-medium" to="/">
+                  <NavLink className="font-medium" to="/dashboard/myAddedPets">
                     My added pets
                   </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
-              {/* 3. adoption request */}
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <NavLink className="font-medium" to="/">
-                    My added pets
-                  </NavLink>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              {/* 4. create donation campaign */}
+              {/* 3. create donation campaign */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <NavLink className="font-medium" to="/">
@@ -56,7 +50,7 @@ export function UserSidebar({ ...props }) {
                   </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
-              {/* 5. my donation campaigns */}
+              {/* 4. my donation campaigns */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <NavLink className="font-medium" to="/">
@@ -64,11 +58,19 @@ export function UserSidebar({ ...props }) {
                   </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
-              {/* 6. My donations */}
+              {/* 5. My donations */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <NavLink className="font-medium" to="/">
                     My Donations
+                  </NavLink>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              {/* 6. donation request */}
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <NavLink className="font-medium" to="/">
+                    Donation Request
                   </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>

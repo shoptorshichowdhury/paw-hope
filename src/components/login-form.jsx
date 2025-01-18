@@ -54,7 +54,9 @@ export function LoginForm({ className, ...props }) {
   //Handle Google login
   const handleGoogleLogin = async () => {
     try {
-      await signInWithGoogle();
+      const { user } = await signInWithGoogle();
+      console.log("Google user", user);
+      
       //show success message
       Swal.fire({
         position: "top-end",
@@ -63,7 +65,9 @@ export function LoginForm({ className, ...props }) {
         showConfirmButton: false,
         timer: 1500,
       });
+      
       navigate(from, { replace: true });
+      
     } catch (err) {
       console.log(err);
       Swal.fire({

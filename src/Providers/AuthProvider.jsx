@@ -10,6 +10,7 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
+import axios from "axios";
 
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
@@ -53,12 +54,39 @@ const AuthProvider = ({ children }) => {
 
   /* Observer */
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       console.log("Current User-->", currentUser);
-      if (currentUser) {
+      if (currentUser?.email) {
+        if (
+          currentUser?.email &&
+          currentUser?.displayName &&
+          currentUser?.photoURL
+        ) {
+          setUser(currentUser);
+        }
+
+        //save user in db
+        await axios.post(
+          `${import.meta.env.VITE_API_URL}/users/${currentUser?.email}`,
+          {
+            name: currentUser?.displayName,
+            email: currentUser?.email,
+            image: currentUser?.photoURL,
+          }
+        );
+
+        //create token (jwt)
+        await axios.post(
+          `${import.meta.env.VITE_API_URL}/jwt`,
+          { email: currentUser?.email },
+          { withCredentials: true }
+        );
+      } else {
+        await axios.get(`${import.meta.env.VITE_API_URL}/logout`, {
+          withCredentials: true,
+        });
         setUser(currentUser);
       }
-      setUser(currentUser);
       setLoading(false);
     });
 

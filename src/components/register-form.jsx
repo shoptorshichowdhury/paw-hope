@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import { imageUpload } from "@/api/utils";
 import useAuth from "@/hooks/useAuth";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 export function RegisterForm({ className, ...props }) {
   const {
@@ -39,8 +40,16 @@ export function RegisterForm({ className, ...props }) {
 
     //create user
     try {
+      //1. register user
       const result = await createUser(email, password);
+      //2. update photo and name
       await updateUserProfile(name, photoURL);
+      //3. save user in db
+      await axios.post(`${import.meta.env.VITE_API_URL}/users/${email}`, {
+        name: name,
+        email: email,
+        image: photoURL,
+      });
 
       //show success message
       Swal.fire({
@@ -69,7 +78,8 @@ export function RegisterForm({ className, ...props }) {
   const handleGoogleSignIn = async () => {
     try {
       const { user } = await signInWithGoogle();
-      console.log(user);
+      console.log("Google user", user);
+
       //show success message
       Swal.fire({
         position: "top-end",
@@ -79,6 +89,7 @@ export function RegisterForm({ className, ...props }) {
         timer: 1500,
       });
       navigate("/");
+      
     } catch (err) {
       console.log(err);
       Swal.fire({

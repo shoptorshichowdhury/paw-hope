@@ -8,12 +8,16 @@ import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useTheme } from "@/components/theme-provider";
 import Tiptap from "@/components/Tiptap/Tiptap";
+import { imageUpload } from "@/api/utils";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
+import Swal from "sweetalert2";
+import useAuth from "@/hooks/useAuth";
 
 //category options
 const options = [
   { value: "dog", label: "Dog" },
   { value: "cat", label: "Cat" },
-  { value: "rabbit", label: "Rabit" },
+  { value: "rabbit", label: "Rabbit" },
   { value: "bird", label: "Bird" },
 ];
 
@@ -59,10 +63,49 @@ const AddPet = () => {
     formState: { errors },
   } = useForm();
   const { theme } = useTheme();
+  const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
 
-  const onSubmit = (data) => {
+  // Handle submit
+  const onSubmit = async (data) => {
     const image = data?.photo[0];
-    console.log(data, image);
+    //send image to imagebb
+    const photoURL = await imageUpload(image);
+
+    //pet owner info
+    const petOwner = {
+      name: user?.displayName,
+      email: user?.email,
+    };
+
+    const petData = {
+      photo: photoURL,
+      name: data?.name,
+      age: data?.age,
+      category: data?.category?.value,
+      location: data?.location,
+      shortDescription: data?.shortDescription,
+      longDescription: data?.longDescription,
+      petOwner,
+    };
+
+    console.log(petData);
+
+    try {
+      //add a pet in db
+      const { data } = await axiosSecure.post("/pets", petData);
+      if (data.insertedId) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Pet added Successfully!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -118,7 +161,7 @@ const AddPet = () => {
                     <Label htmlFor="name">Age</Label>
                     <Input
                       id="age"
-                      type="number"
+                      type="text"
                       placeholder="Age"
                       className="bg-white dark:bg-black"
                       {...register("age", { required: true })}

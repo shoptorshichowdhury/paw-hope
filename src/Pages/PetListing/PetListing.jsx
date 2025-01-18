@@ -10,9 +10,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import axios from "axios";
 import { FaSearch } from "react-icons/fa";
+import { useQuery } from "react-query";
 
 const PetListing = () => {
+  const { data: allPets = [] } = useQuery({
+    queryKey: ["allPets"],
+    queryFn: async () => {
+      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/pets`);
+      return data;
+    },
+  });
+
   return (
     <section>
       {/* page banner seciton */}
@@ -65,12 +75,10 @@ const PetListing = () => {
 
         {/* main pet container */}
         <div className="my-10 md:my-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
-          <AdoptPetCard></AdoptPetCard>
-          <AdoptPetCard></AdoptPetCard>
-          <AdoptPetCard></AdoptPetCard>
-          <AdoptPetCard></AdoptPetCard>
-          <AdoptPetCard></AdoptPetCard>
-          <AdoptPetCard></AdoptPetCard>
+          {/* <AdoptPetCard></AdoptPetCard> */}
+          {allPets.map((pet) => (
+            <AdoptPetCard key={pet._id} pet={pet}></AdoptPetCard>
+          ))}
         </div>
       </div>
     </section>

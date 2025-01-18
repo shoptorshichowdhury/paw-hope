@@ -128,6 +128,7 @@ const Navbar = () => {
                 >
                   <div className="h-10 w-10 rounded-full">
                     <img
+                      referrerPolicy="no-referrer"
                       className="w-full h-full object-cover rounded-full"
                       src={user?.photoURL}
                       alt="profile"
@@ -140,7 +141,9 @@ const Navbar = () => {
                 className="bg-[#FFF5E1] dark:bg-[#2C3E50] shadow-md rounded-md p-2"
               >
                 <DropdownMenuItem className="focus:outline-none">
-                  <Link to="/dashboard"><Button variant="link">Dashboard</Button></Link>
+                  <Link to="/dashboard">
+                    <Button variant="link">Dashboard</Button>
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem className="focus:outline-none">
                   <Button onClick={logOut} variant="link">
