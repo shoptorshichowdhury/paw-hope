@@ -45,7 +45,10 @@ export function UserSidebar({ ...props }) {
               {/* 3. create donation campaign */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <NavLink className="font-medium" to="/">
+                  <NavLink
+                    className="font-medium"
+                    to="/dashboard/createDonationCampaign"
+                  >
                     Create Donation Campaign
                   </NavLink>
                 </SidebarMenuButton>

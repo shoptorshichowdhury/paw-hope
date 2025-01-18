@@ -89,8 +89,6 @@ const AddPet = () => {
       petOwner,
     };
 
-    console.log(petData);
-
     try {
       //add a pet in db
       const { data } = await axiosSecure.post("/pets", petData);

@@ -15,7 +15,6 @@ import { NavLink } from "react-router-dom";
 import "./DashboardSidebar.css";
 
 export function AdminSidebar({ ...props }) {
-
   return (
     <Sidebar {...props}>
       <SidebarHeader className="flex-row items-center justify-center md:py-5">
@@ -48,7 +47,10 @@ export function AdminSidebar({ ...props }) {
               {/* 3. create donation campaign */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <NavLink className="font-medium" to="/">
+                  <NavLink
+                    className="font-medium"
+                    to="/dashboard/createDonationCampaign"
+                  >
                     Create Donation Campaign
                   </NavLink>
                 </SidebarMenuButton>

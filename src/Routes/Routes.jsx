@@ -11,6 +11,7 @@ import Register from "@/Pages/Register/Register";
 import { createBrowserRouter } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
 import MyAddedPets from "@/Pages/MyAddedPets/MyAddedPets";
+import CreateDonationCampaign from "@/Pages/CreateDonationCampaign/CreateDonationCampaign";
 
 export const router = createBrowserRouter([
   {
@@ -77,6 +78,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyAddedPets />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "createDonationCampaign",
+        element: (
+          <PrivateRoute>
+            <CreateDonationCampaign />
           </PrivateRoute>
         ),
       },
