@@ -11,14 +11,20 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import axios from "axios";
+import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { useQuery } from "react-query";
 
 const PetListing = () => {
+  const [search, setSearch] = useState("");
+  const [filter, setFilter] = useState("");
+
   const { data: allPets = [] } = useQuery({
-    queryKey: ["allPets"],
+    queryKey: ["allPets", search, filter],
     queryFn: async () => {
-      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/pets`);
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_API_URL}/pets?search=${search}&filter=${filter}`
+      );
       return data;
     },
   });
@@ -46,6 +52,9 @@ const PetListing = () => {
               <Input
                 className="w-full rounded-full border-primaryBlue/50"
                 type="text"
+                name="search"
+                onChange={(e) => setSearch(e.target.value)}
+                value={search}
                 placeholder="Search"
               ></Input>
               <FaSearch className="text-gray-500 absolute right-4"></FaSearch>
@@ -55,18 +64,18 @@ const PetListing = () => {
           {/* category select */}
           <div className="space-y-2">
             <label className="font-medium">Search By Pet Category</label>
-            <Select>
+            <Select onValueChange={(value) => setFilter(value)}>
               <SelectTrigger className="w-[200px] bg-primaryBlue/50 rounded-full">
                 <SelectValue placeholder="Select Pet Category" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
                   <SelectLabel>Pets</SelectLabel>
-                  <SelectItem value="apple">Dog</SelectItem>
-                  <SelectItem value="banana">Cat</SelectItem>
-                  <SelectItem value="blueberry">Rabbit</SelectItem>
-                  <SelectItem value="grapes">Bird</SelectItem>
-                  <SelectItem value="pineapple">Fish</SelectItem>
+                  <SelectItem value="dog">Dog</SelectItem>
+                  <SelectItem value="cat">Cat</SelectItem>
+                  <SelectItem value="rabbit">Rabbit</SelectItem>
+                  <SelectItem value="bird">Bird</SelectItem>
+                  <SelectItem value="fish">Fish</SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>
@@ -74,7 +83,7 @@ const PetListing = () => {
         </div>
 
         {/* main pet container */}
-        <div className="my-10 md:my-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
+        <div className="my-10 md:my-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8 min-h-60">
           {/* <AdoptPetCard></AdoptPetCard> */}
           {allPets.map((pet) => (
             <AdoptPetCard key={pet._id} pet={pet}></AdoptPetCard>

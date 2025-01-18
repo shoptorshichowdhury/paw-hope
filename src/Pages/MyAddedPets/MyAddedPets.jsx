@@ -23,6 +23,15 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { LuArrowUpDown } from "react-icons/lu";
 import { FaCaretSquareUp, FaCaretSquareDown } from "react-icons/fa";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 
 const columnHelper = createColumnHelper();
 
@@ -119,7 +128,7 @@ const MyAddedPets = () => {
 
   return (
     <section className="w-11/12 mx-auto my-12">
-      <Table>
+      <Table className="border">
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup, idx) => (
             <TableRow key={idx}>
@@ -162,6 +171,54 @@ const MyAddedPets = () => {
           ))}
         </TableBody>
       </Table>
+
+      {/* pagination section */}
+      {pets.length > 10 && (
+        <div className="mt-3 md:mt-5 lg:mt-8 flex items-center justify-between w-full">
+          <div>
+            Page
+            {table.getState().pagination.pageIndex + 1} of{" "}
+            {table.getPageCount()}
+          </div>
+          <div>
+            <Pagination className="items-end w-max">
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious
+                    className={`${
+                      !table.getCanPreviousPage()
+                        ? "opacity-50 cursor-not-allowed"
+                        : "cursor-pointer"
+                    } ${
+                      table.getState().pagination.pageIndex === 0
+                        ? "isActive"
+                        : ""
+                    }`}
+                    onClick={() => table.previousPage()}
+                    isDisable={!table.getCanPreviousPage()}
+                  />
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationNext
+                    className={`${
+                      !table.getCanNextPage()
+                        ? "opacity-50 cursor-not-allowed"
+                        : "cursor-pointer"
+                    } ${
+                      table.getState().pagination.pageIndex ===
+                      table.getPageCount() - 1
+                        ? "isActive"
+                        : ""
+                    }`}
+                    onClick={() => table.nextPage()}
+                    isDisable={!table.getCanNextPage()}
+                  />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

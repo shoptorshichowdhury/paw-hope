@@ -1,4 +1,8 @@
 .sidebar .active {
-    background-color: black;
+    background-color: #4A90E2;
     color: white;
+}
+
+.dark .sidebar .active {
+    color: black;
 }

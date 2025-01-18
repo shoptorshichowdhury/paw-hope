@@ -33,7 +33,7 @@ const AdoptPetCard = ({ pet }) => {
           <span className="font-semibold">Location:</span> {location}
         </p>
         <div>
-          <Link to={`/petDetails`}>
+          <Link to={`/petDetails/${_id}`}>
             <Button variant={`cardBtn`}>View Details</Button>
           </Link>
         </div>
