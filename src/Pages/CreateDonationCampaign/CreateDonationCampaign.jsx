@@ -52,6 +52,7 @@ const CreateDonationCampaign = () => {
       shortDescription: data?.shortDescription,
       longDescription: data?.longDescription,
       donatedAmount: parseFloat(0),
+      status: "Active",
       askerInfo,
     };
 
@@ -213,7 +214,6 @@ const CreateDonationCampaign = () => {
                     </p>
                   )}
                 </div>
-
                 <Button type="submit" variant={`primary`} className="w-full">
                   Create Donation
                 </Button>
