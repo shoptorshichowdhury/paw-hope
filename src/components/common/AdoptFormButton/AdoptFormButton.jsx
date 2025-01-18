@@ -65,7 +65,26 @@ const AdoptFormButton = ({ petData }) => {
       petOwnerInfo: petOwner?.email,
     };
 
-    
+    //Send adoption request to db
+    try {
+      const { data } = await axiosSecure.post(
+        `/adoption-requests`,
+        adoptionRequestData
+      );
+      if (data.insertedId) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Adoption Request Sent!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsDialogOpen(false);
+    }
   };
 
   return (
