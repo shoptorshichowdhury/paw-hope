@@ -32,12 +32,12 @@ export const router = createBrowserRouter([
         element: <PetDetails />,
       },
       {
-        path: "/donationDetails",
-        element: <DonationDetails />,
-      },
-      {
         path: "/donationCampaigns",
         element: <DonationCampaigns />,
+      },
+      {
+        path: "/donationDetails/:id",
+        element: <DonationDetails />,
       },
     ],
   },

@@ -1,8 +1,19 @@
-import AdoptPetCard from "@/components/common/AdoptPetCard/AdoptPetCard";
 import DonationPetCard from "@/components/common/DonationPetCard/DonationPetCard";
 import PageBanner from "@/components/common/PageBanner/PageBanner";
+import axios from "axios";
+import { useQuery } from "react-query";
 
 const DonationCampaigns = () => {
+  const { data: donationCampaigns = [] } = useQuery({
+    queryKey: ["donationCampaigns"],
+    queryFn: async () => {
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_API_URL}/donation-campaigns`
+      );
+      return data;
+    },
+  });
+
   return (
     <section>
       {/* page banner section */}
@@ -13,12 +24,9 @@ const DonationCampaigns = () => {
 
       {/* donation campaign container */}
       <div className="w-11/12 mx-auto my-12 md:my-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
-        <DonationPetCard />
-        <DonationPetCard />
-        <DonationPetCard />
-        <DonationPetCard />
-        <DonationPetCard />
-        <DonationPetCard />
+        {donationCampaigns.map((campaign) => (
+          <DonationPetCard key={campaign._id} campaign={campaign} />
+        ))}
       </div>
     </section>
   );

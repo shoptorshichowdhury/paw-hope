@@ -45,6 +45,7 @@ const CreateDonationCampaign = () => {
 
     //donation campaign data
     const donationData = {
+      petName: data?.name,
       petImage: photoURL,
       maxAmount: data?.maxAmount,
       lastDate: data?.lastDonationDate,
@@ -91,6 +92,21 @@ const CreateDonationCampaign = () => {
                   </p>
                 </div>
 
+                {/* pet name */}
+                <div className="grid gap-2">
+                  <Label htmlFor="name">Pet Name</Label>
+                  <Input
+                    id="name"
+                    type="text"
+                    placeholder="Pet Name"
+                    className="bg-white dark:bg-black"
+                    {...register("name", { required: true })}
+                    required
+                  />
+                  {errors.name && (
+                    <p className="text-sm text-red-600">Name is required.</p>
+                  )}
+                </div>
                 {/* image */}
                 <div className="grid gap-2">
                   <Label htmlFor="picture">Pet Image</Label>

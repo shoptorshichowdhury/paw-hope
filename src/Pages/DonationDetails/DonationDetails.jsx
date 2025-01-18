@@ -1,8 +1,12 @@
 import { Button } from "@/components/ui/button";
 import petImg from "../../assets/pet-details/dog.jpg";
 import DonationPetCard from "@/components/common/DonationPetCard/DonationPetCard";
+import { useParams } from "react-router-dom";
 
 const DonationDetails = () => {
+
+    const {id} = useParams();
+
   return (
     <div className="w-11/12 mx-auto my-12">
       <div className="text-xl md:text-2xl lg:text-5xl font-semibold mb-5 md:mb-10 lg:mb-16 px-6 py-4 bg-primaryPink/20 rounded-xl flex justify-center items-center">
