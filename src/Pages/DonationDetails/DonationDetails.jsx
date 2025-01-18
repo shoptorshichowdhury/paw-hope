@@ -32,6 +32,17 @@ const DonationDetails = () => {
     _id,
   } = donationData || {};
 
+  //get recommended active campaigns
+  const { data: activeCampaigns = [] } = useQuery({
+    queryKey: ["activeCampaigns"],
+    queryFn: async () => {
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_API_URL}/active-donations`
+      );
+      return data;
+    },
+  });
+
   return (
     <div className="w-11/12 mx-auto my-12">
       <div className="text-xl md:text-2xl lg:text-5xl font-semibold mb-5 md:mb-10 lg:mb-16 px-6 py-4 bg-primaryPink/20 rounded-xl flex justify-center items-center">
@@ -103,9 +114,12 @@ const DonationDetails = () => {
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8 lg:gap-10">
-          <DonationPetCard />
-          <DonationPetCard />
-          <DonationPetCard />
+          {activeCampaigns.map((activeCampaign) => (
+            <DonationPetCard
+              key={activeCampaign._id}
+              campaign={activeCampaign}
+            />
+          ))}
         </div>
       </section>
     </div>

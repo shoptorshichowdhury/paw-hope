@@ -4,6 +4,7 @@ import axios from "axios";
 import { useQuery } from "react-query";
 
 const DonationCampaigns = () => {
+  //get all donationCampaigns
   const { data: donationCampaigns = [] } = useQuery({
     queryKey: ["donationCampaigns"],
     queryFn: async () => {
