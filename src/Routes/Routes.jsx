@@ -14,6 +14,7 @@ import MyAddedPets from "@/Pages/MyAddedPets/MyAddedPets";
 import CreateDonationCampaign from "@/Pages/CreateDonationCampaign/CreateDonationCampaign";
 import MyDonationCampaigns from "@/Pages/MyDonationCampaigns/MyDonationCampaigns";
 import MyDonations from "@/Pages/MyDonations/MyDonations";
+import AdoptionRequest from "@/Pages/AdoptionRequest/AdoptionRequest";
 
 export const router = createBrowserRouter([
   {
@@ -104,6 +105,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyDonations />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "adoptionRequest",
+        element: (
+          <PrivateRoute>
+            <AdoptionRequest />
           </PrivateRoute>
         ),
       },

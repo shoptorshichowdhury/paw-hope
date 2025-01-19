@@ -72,7 +72,7 @@ export function UserSidebar({ ...props }) {
               {/* 6. donation request */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <NavLink className="font-medium" to="/">
+                  <NavLink className="font-medium" to="/dashboard/adoptionRequest">
                     Adoption Request
                   </NavLink>
                 </SidebarMenuButton>
