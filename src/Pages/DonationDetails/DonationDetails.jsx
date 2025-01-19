@@ -9,7 +9,7 @@ import DonationFormButton from "@/components/common/DonationFormButton/DonationF
 const DonationDetails = () => {
   const { id } = useParams();
 
-  const { data: donationData = {} } = useQuery({
+  const { data: donationData = {}, refetch } = useQuery({
     queryKey: ["donationData", id],
     queryFn: async () => {
       const { data } = await axios.get(
@@ -102,7 +102,7 @@ const DonationDetails = () => {
               {longDescription}
             </p>
           </div>
-          <DonationFormButton donationData={donationData} />
+          <DonationFormButton donationData={donationData} refetch={refetch} />
         </div>
       </section>
 

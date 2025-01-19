@@ -17,21 +17,15 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const DonationFormButton = ({ donationData }) => {
+const DonationFormButton = ({ donationData, refetch }) => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const navigate = useNavigate();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [error, setError] = useState("");
 
-  const {
-    petName,
-    petImage,
-    maxAmount,
-    lastDate,
-    donatedAmount,
-    _id,
-  } = donationData || {};
+  const { petName, petImage, maxAmount, lastDate, donatedAmount, _id } =
+    donationData || {};
 
   // donation button functionality for user/non-user
   const handleButtonClick = () => {
@@ -80,13 +74,11 @@ const DonationFormButton = ({ donationData }) => {
     //save donation data in db
     try {
       const { data } = await axiosSecure.post(`/donations`, donationInfo);
-
       //send request to update donated amount
       await axiosSecure.patch(`/donation-campaign/donatedAmount/${_id}`, {
         donationAmount,
         status: "increase",
       });
-
       //show success message
       Swal.fire({
         position: "top-end",
@@ -96,7 +88,7 @@ const DonationFormButton = ({ donationData }) => {
         timer: 1500,
       });
 
-      console.log(data);
+      refetch();
     } catch (err) {
       console.log(err);
       Swal.fire({

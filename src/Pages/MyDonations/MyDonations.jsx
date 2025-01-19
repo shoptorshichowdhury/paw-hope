@@ -12,13 +12,14 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import Swal from "sweetalert2";
 
 const MyDonations = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
   //get all donation data
-  const { data: myDonations = [] } = useQuery({
+  const { data: myDonations = [], refetch } = useQuery({
     queryKey: ["myDonations", user?.email],
     queryFn: async () => {
       const { data } = await axiosSecure.get(`/my-donations/${user?.email}`);
@@ -27,6 +28,29 @@ const MyDonations = () => {
   });
 
   //handleRefund
+  const handleRefund = async (id, amount, campaignId) => {
+    try {
+      const { data } = await axiosSecure.delete(`/refund-donation/${id}`);
+      if (data.deletedCount) {
+        //send request to update donated amount
+        await axiosSecure.patch(`/donation-campaign/donatedAmount/${campaignId}`, {
+          donationAmount: amount,
+          status: "decrease",
+        });
+
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Refund successfull!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        refetch();
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <section className="w-11/12 mx-auto my-12">
@@ -52,7 +76,11 @@ const MyDonations = () => {
               <TableCell> {donation.petName}</TableCell>
               <TableCell>${donation.donationAmount}</TableCell>
               <TableCell>
-                <Button onClick={() => handleRefund(donation.campaignId)}>
+                <Button
+                  onClick={() =>
+                    handleRefund(donation._id, donation.donationAmount, donation.campaignId)
+                  }
+                >
                   Refund
                 </Button>
               </TableCell>
