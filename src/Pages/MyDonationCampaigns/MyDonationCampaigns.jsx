@@ -16,13 +16,14 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { FilePenLine } from "lucide-react";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const MyDonationCampaigns = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
   //get donation campaigns
-  const { data: myDonationCampaigns = [] } = useQuery({
+  const { data: myDonationCampaigns = [], refetch } = useQuery({
     queryKey: ["myDonationCampaigns", user?.email],
     queryFn: async () => {
       const { data } = await axiosSecure.get(
@@ -37,6 +38,30 @@ const MyDonationCampaigns = () => {
       }));
     },
   });
+
+  //handle status change
+  const handleStatus = async (id, status) => {
+    try {
+      const newStatus = status === "Active" ? "Pause" : "Active";
+      const { data } = await axiosSecure.patch(`/donation-status/${id}`, {
+        status: newStatus,
+      });
+
+      if (data.modifiedCount > 0) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: `Donation ${newStatus === "Pause" ? "Paused" : "Unpaused"}`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        
+        refetch();
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <section className="w-11/12 mx-auto my-12">
@@ -68,17 +93,15 @@ const MyDonationCampaigns = () => {
                 />
                 <span>{Math.round(campaign.progressPercentage)}%</span>
               </TableCell>
-              <TableCell className="grid grid-cols-2">
-                <Link
-                  className="col-span-1"
-                  to={`/dashboard/editDonationCampaigns/${campaign._id}`}
-                >
+              <TableCell className="flex items-center gap-3">
+                <Link to={`/dashboard/editDonationCampaigns/${campaign._id}`}>
                   <Button className="bg-primaryBlue">
                     <FilePenLine />
                   </Button>
                 </Link>
                 <Button
-                  className={`col-span-1 ${
+                  onClick={() => handleStatus(campaign._id, campaign.status)}
+                  className={` ${
                     campaign.status === "Active" ? "bg-red-400" : "bg-green-400"
                   }`}
                 >
