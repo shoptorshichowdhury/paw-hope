@@ -63,7 +63,11 @@ const PetUpdate = () => {
   const { id } = useParams();
 
   //Get pet data
-  const { data: petData = {}, isSuccess } = useQuery({
+  const {
+    data: petData = {},
+    isLoading,
+    isSuccess,
+  } = useQuery({
     queryKey: ["petData", id],
     queryFn: async () => {
       const { data } = await axiosSecure.get(`/pet/${id}`);
@@ -87,7 +91,7 @@ const PetUpdate = () => {
     handleSubmit,
     control,
     formState: { errors },
-    reset,
+    setValue,
   } = useForm({
     defaultValues: {
       photo: petData?.photo || "",
@@ -102,18 +106,21 @@ const PetUpdate = () => {
   const { theme } = useTheme();
 
   useEffect(() => {
-    if (isSuccess && petData) {
-      reset({
-        photo: petData.photo || "",
-        name: petData.name || "",
-        age: petData.age || "",
-        category: options.find((opt) => opt.value === petData.category) || null,
-        location: petData.location || "",
-        shortDescription: petData.shortDescription || "",
-        longDescription: petData.longDescription || "",
-      });
+    if (petData && isSuccess && !isLoading) {
+      setValue("photo", petData.photo);
+      setValue("name", petData.name);
+      setValue("age", petData.age);
+      setValue(
+        "category",
+        petData.category
+          ? { value: petData.category, label: petData.category }
+          : null
+      );
+      setValue("location", petData.location);
+      setValue("shortDescription", petData.shortDescription);
+      setValue("longDescription", petData?.longDescription);
     }
-  }, [isSuccess, petData, reset]);
+  }, [isLoading, petData, setValue, isSuccess]);
 
   // Handle submit
   const onSubmit = async (data) => {
@@ -288,29 +295,34 @@ const PetUpdate = () => {
                   )}
                 </div>
                 {/* Long description */}
-                <div className="grid gap-2">
-                  <Label htmlFor="location">Long Description</Label>
-                  {/* here tiptap component */}
-                  <Controller
-                    name="longDescription"
-                    control={control}
-                    defaultValue=""
-                    rules={{
-                      required: "Long description is required.",
-                      validate: (value) =>
-                        value.trim() !== "" ||
-                        "Long description cannot be empty.",
-                    }}
-                    render={({ field }) => (
-                      <Tiptap value={field.value} onChange={field.onChange} />
+                {!isLoading && (
+                  <div className="grid gap-2">
+                    <Label htmlFor="location">Long Description</Label>
+                    {/* here tiptap component */}
+                    <Controller
+                      name="longDescription"
+                      control={control}
+                      defaultValue={petData?.longDescription}
+                      rules={{
+                        required: "Long description is required.",
+                        validate: (value) =>
+                          value.trim() !== "" ||
+                          "Long description cannot be empty.",
+                      }}
+                      render={({ field }) => (
+                        <Tiptap
+                          value={field.value || petData?.longDescription || ""}
+                          onChange={field.onChange}
+                        />
+                      )}
+                    />
+                    {errors.longDescription && (
+                      <p className="text-sm text-red-600">
+                        {errors.longDescription.message}
+                      </p>
                     )}
-                  />
-                  {errors.longDescription && (
-                    <p className="text-sm text-red-600">
-                      {errors.longDescription.message}
-                    </p>
-                  )}
-                </div>
+                  </div>
+                )}
                 <Button type="submit" variant={`primary`} className="w-full">
                   Add Pet
                 </Button>

@@ -14,6 +14,7 @@ import {
 import DonatorModalBtn from "@/components/common/DonatorModalBtn/DonatorModalBtn";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import { FilePenLine } from "lucide-react";
 
 const MyDonationCampaigns = () => {
   const { user } = useAuth();
@@ -67,6 +68,9 @@ const MyDonationCampaigns = () => {
                 <span>{Math.round(campaign.progressPercentage)}%</span>
               </TableCell>
               <TableCell className="space-x-2 grid grid-cols-2">
+                <Button className="col-span-1 bg-primaryBlue">
+                  <FilePenLine />
+                </Button>
                 <Button
                   className={`col-span-1 ${
                     campaign.status === "Active" ? "bg-red-400" : "bg-green-400"
@@ -74,7 +78,6 @@ const MyDonationCampaigns = () => {
                 >
                   {campaign.status === "Active" ? `Pause` : "Unpause"}
                 </Button>
-                <Button className="bg-primaryBlue col-span-1">Edit</Button>
               </TableCell>
               <TableCell>
                 <DonatorModalBtn />

@@ -34,75 +34,9 @@ import {
 } from "@/components/ui/pagination";
 import { HousePlus } from "lucide-react";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const columnHelper = createColumnHelper();
-
-const columns = [
-  columnHelper.accessor("serial", {
-    header: () => <span>Serial No.</span>,
-    cell: (info) => info.getValue(),
-  }),
-  columnHelper.accessor("photo", {
-    header: () => <span>Pet Image</span>,
-    cell: (info) => (
-      <img
-        src={info.getValue()}
-        alt="Pet"
-        className="w-12 h-12 object-cover rounded-xl"
-      />
-    ),
-  }),
-  columnHelper.accessor("name", {
-    header: () => <span>Pet Name</span>,
-    cell: (info) => info.getValue(),
-  }),
-  columnHelper.accessor("category", {
-    header: () => <span>Category</span>,
-    cell: (info) => info.getValue(),
-  }),
-  columnHelper.accessor("adopted", {
-    header: () => <span>Adoption Status</span>,
-    cell: (info) => {
-      const value = info.getValue();
-      return value ? "Adopted" : "Not Adopted";
-    },
-  }),
-  columnHelper.display({
-    id: "action",
-    header: () => <span>Action</span>,
-    enableSorting: false,
-    cell: (info) => (
-      <div className="flex gap-2">
-        <Link to={`/dashboard/petUpdate/${info.row.original._id}`}>
-          <Button
-            title="update"
-            size="sm"
-            variant="cardBtn"
-            className="flex items-center gap-2"
-          >
-            <FaEdit />
-          </Button>
-        </Link>
-        <Button
-          title="delete"
-          size="sm"
-          variant="cardBtn"
-          className="flex items-center gap-2"
-        >
-          <FaTrash />
-        </Button>
-        <Button
-          title="adopted"
-          size="sm"
-          variant="cardBtn"
-          className="flex items-center gap-2"
-        >
-          <HousePlus strokeWidth={2.25} />
-        </Button>
-      </div>
-    ),
-  }),
-];
 
 const MyAddedPets = () => {
   const { user } = useAuth();
@@ -110,13 +44,79 @@ const MyAddedPets = () => {
   const [sorting, setSorting] = useState([]);
 
   //Get all added pets
-  const { data: pets = [] } = useQuery({
+  const { data: pets = [], refetch } = useQuery({
     queryKey: ["pets", user?.email],
     queryFn: async () => {
       const { data } = await axiosSecure(`/pets/${user?.email}`);
       return data.map((pet, index) => ({ ...pet, serial: index + 1 }));
     },
   });
+
+  const columns = [
+    columnHelper.accessor("serial", {
+      header: () => <span>Serial No.</span>,
+      cell: (info) => info.getValue(),
+    }),
+    columnHelper.accessor("photo", {
+      header: () => <span>Pet Image</span>,
+      cell: (info) => (
+        <img
+          src={info.getValue()}
+          alt="Pet"
+          className="w-12 h-12 object-cover rounded-xl"
+        />
+      ),
+    }),
+    columnHelper.accessor("name", {
+      header: () => <span>Pet Name</span>,
+      cell: (info) => info.getValue(),
+    }),
+    columnHelper.accessor("category", {
+      header: () => <span>Category</span>,
+      cell: (info) => info.getValue(),
+    }),
+    columnHelper.accessor("adopted", {
+      header: () => <span>Adoption Status</span>,
+      cell: (info) => {
+        const value = info.getValue();
+        return value ? "Adopted" : "Not Adopted";
+      },
+    }),
+    columnHelper.display({
+      id: "action",
+      header: () => <span>Action</span>,
+      enableSorting: false,
+      cell: (info) => (
+        <div className="flex gap-2">
+          <Link to={`/dashboard/petUpdate/${info.row.original._id}`}>
+            <Button
+              title="update"
+              size="sm"
+              className="bg-primaryBlue flex items-center gap-2"
+            >
+              <FaEdit />
+            </Button>
+          </Link>
+          <Button
+            onClick={() => handleDelete(info.row.original._id)}
+            title="delete"
+            size="sm"
+            className="bg-red-500 flex items-center gap-2"
+          >
+            <FaTrash />
+          </Button>
+          <Button
+            onClick={() => handleAdopt(info.row.original._id)}
+            title="adopted"
+            size="sm"
+            className="bg-green-500 flex items-center gap-2"
+          >
+            <HousePlus strokeWidth={2.25} />
+          </Button>
+        </div>
+      ),
+    }),
+  ];
 
   const table = useReactTable({
     data: pets,
@@ -129,6 +129,56 @@ const MyAddedPets = () => {
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
   });
+
+  //delete pet handler
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure to delete this pet?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const { data } = await axiosSecure.delete(`/delete-pet/${id}`);
+          if (data.deletedCount) {
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Pet deleted Successfully!",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            refetch();
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    });
+  };
+
+  //adopt pet handler
+  const handleAdopt = async (id) => {
+    try {
+      const { data } = await axiosSecure.patch(`/adopt-pet/${id}`);
+      if (data.modifiedCount) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Pet Adopted Successfully!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        refetch();
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <section className="w-11/12 mx-auto my-12">

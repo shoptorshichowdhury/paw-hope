@@ -11,16 +11,17 @@ const content = ``;
 const Tiptap = ({ value, onChange }) => {
   const editor = useEditor({
     extensions,
-    content: value, // Initialize with value from props
+    content: value,
     onUpdate: ({ editor }) => {
-      const html = editor.getHTML(); // Get updated content as HTML
-      onChange(html); // Update the react-hook-form state
+      const html = editor.getHTML();
+      onChange(html);
     },
   });
 
   if (!editor) {
     return null;
   }
+  
   return (
     <div>
       <div className="w-full flex flex-wrap bg-primaryBlue/40 p-3 md:p-5 lg:px-5  gap-2">
