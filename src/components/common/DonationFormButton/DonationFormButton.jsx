@@ -24,8 +24,14 @@ const DonationFormButton = ({ donationData }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [error, setError] = useState("");
 
-  const { petName, petImage, maxAmount, lastDate, donatedAmount, status, _id } =
-    donationData || {};
+  const {
+    petName,
+    petImage,
+    maxAmount,
+    lastDate,
+    donatedAmount,
+    _id,
+  } = donationData || {};
 
   // donation button functionality for user/non-user
   const handleButtonClick = () => {
@@ -84,10 +90,10 @@ const DonationFormButton = ({ donationData }) => {
       //show success message
       Swal.fire({
         position: "top-end",
-          icon: "success",
-          title: "Donation added Successfully!",
-          showConfirmButton: false,
-          timer: 1500,
+        icon: "success",
+        title: "Donation added Successfully!",
+        showConfirmButton: false,
+        timer: 1500,
       });
 
       console.log(data);

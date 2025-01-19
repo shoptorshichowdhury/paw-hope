@@ -55,7 +55,7 @@ const MyDonationCampaigns = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        
+
         refetch();
       }
     } catch (err) {
@@ -79,7 +79,7 @@ const MyDonationCampaigns = () => {
           {myDonationCampaigns.map((campaign) => (
             <TableRow key={campaign._id}>
               <TableCell>{campaign.petName}</TableCell>
-              <TableCell> {campaign.maxAmount}</TableCell>
+              <TableCell>${campaign.maxAmount}</TableCell>
               <TableCell>
                 <Progress
                   className={`h-2 rounded-lg text-blue-500 ${
@@ -109,7 +109,7 @@ const MyDonationCampaigns = () => {
                 </Button>
               </TableCell>
               <TableCell>
-                <DonatorModalBtn />
+                <DonatorModalBtn campaignId={campaign._id} />
               </TableCell>
             </TableRow>
           ))}

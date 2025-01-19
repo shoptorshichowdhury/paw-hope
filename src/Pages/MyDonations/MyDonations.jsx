@@ -26,6 +26,8 @@ const MyDonations = () => {
     },
   });
 
+  //handleRefund
+
   return (
     <section className="w-11/12 mx-auto my-12">
       <Table>
@@ -41,12 +43,18 @@ const MyDonations = () => {
           {myDonations.map((donation) => (
             <TableRow key={donation._id}>
               <TableCell>
-                <img className="w-12 h-12 object-cover rounded-xl" src={donation.petImage} alt={donation.petName} />
+                <img
+                  className="w-12 h-12 object-cover rounded-xl"
+                  src={donation.petImage}
+                  alt={donation.petName}
+                />
               </TableCell>
               <TableCell> {donation.petName}</TableCell>
               <TableCell>${donation.donationAmount}</TableCell>
               <TableCell>
-                <Button>Refund</Button>
+                <Button onClick={() => handleRefund(donation.campaignId)}>
+                  Refund
+                </Button>
               </TableCell>
             </TableRow>
           ))}
