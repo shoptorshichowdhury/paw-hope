@@ -24,7 +24,7 @@ const DonationFormButton = ({ donationData }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [error, setError] = useState("");
 
-  const { maxAmount, lastDate, donatedAmount, status, _id } =
+  const { petName, petImage, maxAmount, lastDate, donatedAmount, status, _id } =
     donationData || {};
 
   // donation button functionality for user/non-user
@@ -66,6 +66,8 @@ const DonationFormButton = ({ donationData }) => {
     const donationInfo = {
       campaignId: _id,
       donationAmount,
+      petName,
+      petImage,
       donator,
     };
 
@@ -73,11 +75,19 @@ const DonationFormButton = ({ donationData }) => {
     try {
       const { data } = await axiosSecure.post(`/donations`, donationInfo);
 
-      console.log(data);
       //send request to update donated amount
       await axiosSecure.patch(`/donation-campaign/donatedAmount/${_id}`, {
         donationAmount,
         status: "increase",
+      });
+
+      //show success message
+      Swal.fire({
+        position: "top-end",
+          icon: "success",
+          title: "Donation added Successfully!",
+          showConfirmButton: false,
+          timer: 1500,
       });
 
       console.log(data);
@@ -90,6 +100,8 @@ const DonationFormButton = ({ donationData }) => {
         showConfirmButton: false,
         timer: 1500,
       });
+    } finally {
+      setIsDialogOpen(false);
     }
   };
 

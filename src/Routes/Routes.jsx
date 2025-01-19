@@ -13,6 +13,7 @@ import PrivateRoute from "./PrivateRoute";
 import MyAddedPets from "@/Pages/MyAddedPets/MyAddedPets";
 import CreateDonationCampaign from "@/Pages/CreateDonationCampaign/CreateDonationCampaign";
 import MyDonationCampaigns from "@/Pages/MyDonationCampaigns/MyDonationCampaigns";
+import MyDonations from "@/Pages/MyDonations/MyDonations";
 
 export const router = createBrowserRouter([
   {
@@ -95,6 +96,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyDonationCampaigns />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "myDonations",
+        element: (
+          <PrivateRoute>
+            <MyDonations />
           </PrivateRoute>
         ),
       },

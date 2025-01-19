@@ -64,7 +64,7 @@ export function UserSidebar({ ...props }) {
               {/* 5. My donations */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <NavLink className="font-medium" to="/">
+                  <NavLink className="font-medium" to="/dashboard/myDonations">
                     My Donations
                   </NavLink>
                 </SidebarMenuButton>
@@ -73,7 +73,7 @@ export function UserSidebar({ ...props }) {
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <NavLink className="font-medium" to="/">
-                    Donation Request
+                    Adoption Request
                   </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>

@@ -58,7 +58,10 @@ export function AdminSidebar({ ...props }) {
               {/* 4. my donation campaigns */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <NavLink className="font-medium" to="/dashboard/myDonationCampaigns">
+                  <NavLink
+                    className="font-medium"
+                    to="/dashboard/myDonationCampaigns"
+                  >
                     My Donation Campaigns
                   </NavLink>
                 </SidebarMenuButton>
@@ -66,7 +69,7 @@ export function AdminSidebar({ ...props }) {
               {/* 5. My donations */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <NavLink className="font-medium" to="/">
+                  <NavLink className="font-medium" to="/dashboard/myDonations">
                     My Donations
                   </NavLink>
                 </SidebarMenuButton>
@@ -75,7 +78,7 @@ export function AdminSidebar({ ...props }) {
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <NavLink className="font-medium" to="/">
-                    Donation Request
+                    Adoption Request
                   </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
