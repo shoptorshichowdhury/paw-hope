@@ -128,12 +128,6 @@ const PetUpdate = () => {
     //send image to imagebb
     const photoURL = await imageUpload(image);
 
-    //pet owner info
-    const petOwner = {
-      name: user?.displayName,
-      email: user?.email,
-    };
-
     const petInfo = {
       photo: photoURL,
       name: data?.name,
@@ -142,7 +136,6 @@ const PetUpdate = () => {
       location: data?.location,
       shortDescription: data?.shortDescription,
       longDescription: data?.longDescription,
-      petOwner,
     };
 
     try {

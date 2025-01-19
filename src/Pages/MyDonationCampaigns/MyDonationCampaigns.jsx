@@ -15,6 +15,7 @@ import DonatorModalBtn from "@/components/common/DonatorModalBtn/DonatorModalBtn
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { FilePenLine } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const MyDonationCampaigns = () => {
   const { user } = useAuth();
@@ -67,10 +68,15 @@ const MyDonationCampaigns = () => {
                 />
                 <span>{Math.round(campaign.progressPercentage)}%</span>
               </TableCell>
-              <TableCell className="space-x-2 grid grid-cols-2">
-                <Button className="col-span-1 bg-primaryBlue">
-                  <FilePenLine />
-                </Button>
+              <TableCell className="grid grid-cols-2">
+                <Link
+                  className="col-span-1"
+                  to={`/dashboard/editDonationCampaigns/${campaign._id}`}
+                >
+                  <Button className="bg-primaryBlue">
+                    <FilePenLine />
+                  </Button>
+                </Link>
                 <Button
                   className={`col-span-1 ${
                     campaign.status === "Active" ? "bg-red-400" : "bg-green-400"

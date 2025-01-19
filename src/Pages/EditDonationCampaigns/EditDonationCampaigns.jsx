@@ -8,7 +8,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@radix-ui/react-label";
 import { Input } from "@/components/ui/input";
@@ -18,16 +18,66 @@ import { imageUpload } from "@/api/utils";
 import useAuth from "@/hooks/useAuth";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { useQuery } from "react-query";
+import { useParams } from "react-router-dom";
 
-const CreateDonationCampaign = () => {
+const EditDonationCampaigns = () => {
   const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
+  const { id } = useParams();
+
+  //Get single donation data
+  const { data: donationData = {} } = useQuery({
+    queryKey: ["donationData", id],
+    queryFn: async () => {
+      const { data } = await axiosSecure.get(`/donation-campaign/${id}`);
+      return data;
+    },
+  });
+
+  const {
+    petName,
+    petImage,
+    maxAmount,
+    lastDate,
+    shortDescription,
+    longDescription,
+    donatedAmount,
+    status,
+    _id,
+  } = donationData || {};
+
   const {
     register,
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm();
-  const { user } = useAuth();
+    reset,
+  } = useForm({
+    defaultValues: {
+      name: "",
+      photo: "",
+      maxAmount: "",
+      lastDonationDate: null,
+      shortDescription: "",
+      longDescription: "",
+    },
+  });
+
+  useEffect(() => {
+    if (donationData) {
+      reset({
+        name: donationData.petName,
+        photo: donationData.petImage,
+        maxAmount: donationData.maxAmount,
+        lastDonationDate: donationData.lastDate
+          ? new Date(donationData.lastDate)
+          : null,
+        shortDescription: donationData.shortDescription,
+        longDescription: donationData.longDescription,
+      });
+    }
+  }, [donationData, reset]);
 
   // Handle submit
   const onSubmit = async (data) => {
@@ -36,35 +86,27 @@ const CreateDonationCampaign = () => {
     //send image to imagebb
     const photoURL = await imageUpload(photo);
 
-    //donation campaign asker info
-    const askerInfo = {
-      name: user?.displayName,
-      email: user?.email,
-    };
-
     //donation campaign data
-    const donationData = {
+    const donationInfo = {
       petName: data?.name,
       petImage: photoURL,
       maxAmount: parseFloat(data?.maxAmount),
       lastDate: data?.lastDonationDate,
       shortDescription: data?.shortDescription,
       longDescription: data?.longDescription,
-      donatedAmount: parseFloat(0),
-      askerInfo,
     };
 
-    //save data in db
+    //update donation data in db
     try {
-      const { data } = await axiosSecure.post(
-        "/donation-campaigns",
-        donationData
+      const { data } = await axiosSecure.put(
+        `/update-donation-campaign/${id}`,
+        donationInfo
       );
-      if (data.insertedId) {
+      if (data.modifiedCount > 0) {
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Donation Campaign added Successfully!",
+          title: "Donation Campaign updated Successfully!",
           showConfirmButton: false,
           timer: 1500,
         });
@@ -83,11 +125,9 @@ const CreateDonationCampaign = () => {
             <form onSubmit={handleSubmit(onSubmit)} className="p-6 md:p-8">
               <div className="flex flex-col gap-6">
                 <div className="flex flex-col items-center text-center">
-                  <h1 className="text-2xl font-bold">
-                    Create Donation Campaign
-                  </h1>
+                  <h1 className="text-2xl font-bold">Edit Donation Campaign</h1>
                   <p className="text-balance text-muted-foreground">
-                    Create a donation campaign for pitty pets!
+                    Edit your donation campaign for pitty pets!
                   </p>
                 </div>
 
@@ -224,4 +264,4 @@ const CreateDonationCampaign = () => {
   );
 };
 
-export default CreateDonationCampaign;
+export default EditDonationCampaigns;
