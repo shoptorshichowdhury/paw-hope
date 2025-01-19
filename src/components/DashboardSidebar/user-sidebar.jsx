@@ -56,7 +56,7 @@ export function UserSidebar({ ...props }) {
               {/* 4. my donation campaigns */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <NavLink className="font-medium" to="/">
+                  <NavLink className="font-medium" to="/dashboard/myDonationCampaigns">
                     My Donation Campaigns
                   </NavLink>
                 </SidebarMenuButton>
