@@ -10,12 +10,13 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Eye } from "lucide-react";
 
 const DonatorModalBtn = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">View Donators</Button>
+        <Button className='bg-primaryBlue'><Eye /></Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>

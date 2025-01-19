@@ -12,6 +12,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
+import { Check, X } from "lucide-react";
 
 const AdoptionRequest = () => {
   const { user } = useAuth();
@@ -57,9 +58,9 @@ const AdoptionRequest = () => {
               <TableCell>{request.userInfo.email}</TableCell>
               <TableCell>{request.userInfo.phoneNumber}</TableCell>
               <TableCell>{request.userInfo.address}</TableCell>
-              <TableCell>
-                <Button>Accept</Button>
-                <Button>Reject</Button>
+              <TableCell className='space-x-2'>
+                <Button title='accept' className='bg-green-500'><Check /></Button>
+                <Button title='reject' className='bg-red-600'><X /></Button>
               </TableCell>
             </TableRow>
           ))}

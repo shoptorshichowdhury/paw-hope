@@ -32,6 +32,8 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { HousePlus } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const columnHelper = createColumnHelper();
 
@@ -71,14 +73,16 @@ const columns = [
     enableSorting: false,
     cell: (info) => (
       <div className="flex gap-2">
-        <Button
-          title="update"
-          size="sm"
-          variant="cardBtn"
-          className="flex items-center gap-2"
-        >
-          <FaEdit />
-        </Button>
+        <Link to={`/dashboard/petUpdate/${info.row.original._id}`}>
+          <Button
+            title="update"
+            size="sm"
+            variant="cardBtn"
+            className="flex items-center gap-2"
+          >
+            <FaEdit />
+          </Button>
+        </Link>
         <Button
           title="delete"
           size="sm"
@@ -93,7 +97,7 @@ const columns = [
           variant="cardBtn"
           className="flex items-center gap-2"
         >
-          <FaPaw />
+          <HousePlus strokeWidth={2.25} />
         </Button>
       </div>
     ),
