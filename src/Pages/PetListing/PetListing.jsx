@@ -11,24 +11,43 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import { useQuery } from "react-query";
+import { useInfiniteQuery, useQuery } from "react-query";
 import PublicSkeletonCard from "../Shared/LoadingSkeleton/PublicSkeletonCard";
+import { useInView } from "react-intersection-observer";
 
 const PetListing = () => {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("");
 
-  const { data: allPets = [], isLoading } = useQuery({
-    queryKey: ["allPets", search, filter],
-    queryFn: async () => {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_API_URL}/pets?search=${search}&filter=${filter}`
-      );
-      return data;
-    },
-  });
+  const getPetListing = async (page) => {
+    const { data } = await axios.get(
+      `${
+        import.meta.env.VITE_API_URL
+      }/pets?search=${search}&filter=${filter}&_page=${page.pageParam}`
+    );
+    return data;
+  };
+
+  //get all donationCampaigns
+  const { ref, inView } = useInView();
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
+    useInfiniteQuery({
+      queryKey: ["getPetListing", search, filter],
+      queryFn: getPetListing,
+      staleTime: 10000,
+      initialPageParam: 1,
+      getNextPageParam: (lastPage, allPages) => {
+        return lastPage.length === 0 ? null : allPages.length + 1;
+      },
+    });
+
+  useEffect(() => {
+    if (inView) fetchNextPage();
+  }, [inView]);
+
+  const allPets = data?.pages?.flatMap((page) => page) || [];
 
   return (
     <section>
@@ -86,9 +105,11 @@ const PetListing = () => {
         {/* main pet container */}
         <div className="my-10 md:my-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8 min-h-60">
           {isLoading && <PublicSkeletonCard cards={8}></PublicSkeletonCard>}
-          {allPets.map((pet) => (
+          {allPets && allPets.map((pet) => (
             <AdoptPetCard key={pet._id} pet={pet}></AdoptPetCard>
           ))}
+          
+          {hasNextPage && <div ref={ref} className="h-4 w-full"></div>}
         </div>
       </div>
     </section>
