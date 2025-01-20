@@ -14,12 +14,13 @@ import axios from "axios";
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { useQuery } from "react-query";
+import PublicSkeletonCard from "../Shared/LoadingSkeleton/PublicSkeletonCard";
 
 const PetListing = () => {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("");
 
-  const { data: allPets = [] } = useQuery({
+  const { data: allPets = [], isLoading } = useQuery({
     queryKey: ["allPets", search, filter],
     queryFn: async () => {
       const { data } = await axios.get(
@@ -84,7 +85,7 @@ const PetListing = () => {
 
         {/* main pet container */}
         <div className="my-10 md:my-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8 min-h-60">
-          {/* <AdoptPetCard></AdoptPetCard> */}
+          {isLoading && <PublicSkeletonCard cards={8}></PublicSkeletonCard>}
           {allPets.map((pet) => (
             <AdoptPetCard key={pet._id} pet={pet}></AdoptPetCard>
           ))}

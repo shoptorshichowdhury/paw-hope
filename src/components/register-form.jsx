@@ -18,6 +18,7 @@ export function RegisterForm({ className, ...props }) {
     createUser,
     updateUserProfile,
     signInWithGoogle,
+    signInWithGithub,
     loading,
     setLoading,
   } = useAuth();
@@ -74,6 +75,33 @@ export function RegisterForm({ className, ...props }) {
   const handleGoogleSignIn = async () => {
     try {
       const data = await signInWithGoogle();
+      //save user info in db
+      await saveUser(data?.user);
+      //show success message
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Registration Successful!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: `${err?.code}`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+  };
+
+  //Handle Github signUP
+  const handleGithubSignIn = async () => {
+    try {
+      const data = await signInWithGithub();
       //save user info in db
       await saveUser(data?.user);
       //show success message
@@ -215,6 +243,7 @@ export function RegisterForm({ className, ...props }) {
                 SignUp with Google
               </Button>
               <Button
+                onClick={handleGithubSignIn}
                 type="button"
                 variant="outline"
                 className="w-full bg-white dark:bg-black"

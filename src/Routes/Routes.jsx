@@ -21,12 +21,13 @@ import AdminRoute from "./AdminRoute";
 import Users from "@/Pages/Users/Users";
 import AllPets from "@/Pages/AllPets/AllPets";
 import AllDonations from "@/Pages/AllDonations/AllDonations";
+import ErrorPage from "@/Pages/ErrorPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
-    errorElement: <p>Error holo toh.....</p>,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",

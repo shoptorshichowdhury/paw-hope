@@ -13,7 +13,8 @@ import Swal from "sweetalert2";
 import { saveUser } from "@/api/utils";
 
 export function LoginForm({ className, ...props }) {
-  const { loading, loginUser, setLoading, signInWithGoogle } = useAuth();
+  const { loading, loginUser, setLoading, signInWithGoogle, signInWithGithub } =
+    useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location?.state?.from?.pathname || "/";
@@ -56,6 +57,36 @@ export function LoginForm({ className, ...props }) {
   const handleGoogleLogin = async () => {
     try {
       const data = await signInWithGoogle();
+      //save user info in db
+      await saveUser(data?.user);
+
+      //show success message
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Login Successful!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+
+      navigate(from, { replace: true });
+    } catch (err) {
+      console.log(err);
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: `${err?.code}`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+  };
+
+  //Handle Github login
+  const handleGithubLogin = async () => {
+    try {
+      const data = await signInWithGithub();
+      console.log(data);
       //save user info in db
       await saveUser(data?.user);
 
@@ -151,6 +182,7 @@ export function LoginForm({ className, ...props }) {
                 Login with Google
               </Button>
               <Button
+                onClick={handleGithubLogin}
                 type="button"
                 variant="outline"
                 className="w-full bg-white dark:bg-black"

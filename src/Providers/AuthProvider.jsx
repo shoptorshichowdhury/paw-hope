@@ -3,6 +3,7 @@ import { createContext, useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   getAuth,
+  GithubAuthProvider,
   GoogleAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
@@ -15,6 +16,7 @@ import axios from "axios";
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
+const githubProvider = new GithubAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -50,6 +52,12 @@ const AuthProvider = ({ children }) => {
   const signInWithGoogle = () => {
     setLoading(true);
     return signInWithPopup(auth, googleProvider);
+  };
+
+  //Github signin
+  const signInWithGithub = () => {
+    setLoading(true);
+    return signInWithPopup(auth, githubProvider);
   };
 
   /* Observer */
@@ -88,6 +96,7 @@ const AuthProvider = ({ children }) => {
     updateUserProfile,
     loginUser,
     signInWithGoogle,
+    signInWithGithub,
     logOut,
   };
 
