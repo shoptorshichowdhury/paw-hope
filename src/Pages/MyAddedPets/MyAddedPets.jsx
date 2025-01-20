@@ -164,7 +164,9 @@ const MyAddedPets = () => {
   //adopt pet handler
   const handleAdopt = async (id) => {
     try {
-      const { data } = await axiosSecure.patch(`/adopt-pet/${id}`);
+      const { data } = await axiosSecure.patch(`/adopt-pet/${id}`, {
+        status: true,
+      });
       if (data.modifiedCount) {
         Swal.fire({
           position: "top-end",
