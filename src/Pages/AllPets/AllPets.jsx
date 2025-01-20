@@ -14,11 +14,16 @@ import useAxiosSecure from "@/hooks/useAxiosSecure";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import Skeleton from "react-loading-skeleton";
 
 const AllPets = () => {
   const axiosSecure = useAxiosSecure();
   //get all pets data
-  const { data: allPets = [], refetch } = useQuery({
+  const {
+    data: allPets = [],
+    refetch,
+    isLoading,
+  } = useQuery({
     queryKey: ["allPets"],
     queryFn: async () => {
       const { data } = await axiosSecure("/all-pets");
@@ -79,6 +84,8 @@ const AllPets = () => {
       console.log(err);
     }
   };
+
+  if (isLoading) return <Skeleton count={5}></Skeleton>;
 
   return (
     <section className="w-11/12 mx-auto my-12">

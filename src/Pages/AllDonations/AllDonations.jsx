@@ -14,18 +14,25 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
+import Skeleton from "react-loading-skeleton";
 
 const AllDonations = () => {
   const axiosSecure = useAxiosSecure();
 
   //get all donations
-  const { data: allDonations = [], refetch } = useQuery({
+  const {
+    data: allDonations = [],
+    refetch,
+    isLoading,
+  } = useQuery({
     queryKey: ["allDonations"],
     queryFn: async () => {
       const { data } = await axiosSecure("/all-donation-campaigns");
       return data;
     },
   });
+
+  if (isLoading) return <Skeleton count={5}></Skeleton>;
 
   //handle donation status change
   const handleStatus = async (id, status) => {

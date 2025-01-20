@@ -35,6 +35,7 @@ import {
 import { HousePlus } from "lucide-react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import Skeleton from "react-loading-skeleton";
 
 const columnHelper = createColumnHelper();
 
@@ -44,7 +45,7 @@ const MyAddedPets = () => {
   const [sorting, setSorting] = useState([]);
 
   //Get all added pets
-  const { data: pets = [], refetch } = useQuery({
+  const { data: pets = [], refetch, isLoading } = useQuery({
     queryKey: ["pets", user?.email],
     queryFn: async () => {
       const { data } = await axiosSecure(`/pets/${user?.email}`);
@@ -181,6 +182,8 @@ const MyAddedPets = () => {
       console.log(err);
     }
   };
+
+  if(isLoading) return <Skeleton count={5}></Skeleton>
 
   return (
     <section className="w-11/12 mx-auto my-12">

@@ -14,13 +14,18 @@ import {
 import { Button } from "@/components/ui/button";
 import { Check, X } from "lucide-react";
 import Swal from "sweetalert2";
+import Skeleton from "react-loading-skeleton";
 
 const AdoptionRequest = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
   //get all donation data
-  const { data: adoptionRequest = [], refetch } = useQuery({
+  const {
+    data: adoptionRequest = [],
+    refetch,
+    isLoading,
+  } = useQuery({
     queryKey: ["adoptionRequest", user?.email],
     queryFn: async () => {
       const { data } = await axiosSecure.get(
@@ -68,7 +73,9 @@ const AdoptionRequest = () => {
       console.log(err);
     }
   };
-  
+
+  if (isLoading) return <Skeleton count={5}></Skeleton>;
+
   return (
     <section className="w-11/12 mx-auto my-12">
       <Table>

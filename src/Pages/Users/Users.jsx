@@ -12,12 +12,17 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import Swal from "sweetalert2";
+import Skeleton from "react-loading-skeleton";
 
 const Users = () => {
   const axiosSecure = useAxiosSecure();
 
   //get all user data
-  const { data: users = [], refetch } = useQuery({
+  const {
+    data: users = [],
+    refetch,
+    isLoading,
+  } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
       const { data } = await axiosSecure("/users");
@@ -43,6 +48,8 @@ const Users = () => {
       console.log(err);
     }
   };
+
+  if (isLoading) return <Skeleton count={5}></Skeleton>;
 
   return (
     <section className="w-11/12 mx-auto my-12">
