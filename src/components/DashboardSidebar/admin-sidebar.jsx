@@ -96,7 +96,7 @@ export function AdminSidebar({ ...props }) {
               {/* 1. users */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <NavLink className="font-medium" to="/">
+                  <NavLink className="font-medium" to="/dashboard/allUsers">
                     Users
                   </NavLink>
                 </SidebarMenuButton>
@@ -104,7 +104,7 @@ export function AdminSidebar({ ...props }) {
               {/* 2. All pets */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <NavLink className="font-medium" to="/">
+                  <NavLink className="font-medium" to="/dashboard/allPets">
                     All Pets
                   </NavLink>
                 </SidebarMenuButton>
@@ -112,7 +112,7 @@ export function AdminSidebar({ ...props }) {
               {/* 3. all donations */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <NavLink className="font-medium" to="/">
+                  <NavLink className="font-medium" to="/dashboard/allDonations">
                     All Donations
                   </NavLink>
                 </SidebarMenuButton>

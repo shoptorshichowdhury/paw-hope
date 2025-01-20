@@ -10,6 +10,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "@/hooks/useAuth";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import { saveUser } from "@/api/utils";
 
 export function LoginForm({ className, ...props }) {
   const { loading, loginUser, setLoading, signInWithGoogle } = useAuth();
@@ -54,9 +55,10 @@ export function LoginForm({ className, ...props }) {
   //Handle Google login
   const handleGoogleLogin = async () => {
     try {
-      const { user } = await signInWithGoogle();
-      console.log("Google user", user);
-      
+      const data = await signInWithGoogle();
+      //save user info in db
+      await saveUser(data?.user);
+
       //show success message
       Swal.fire({
         position: "top-end",
@@ -65,9 +67,8 @@ export function LoginForm({ className, ...props }) {
         showConfirmButton: false,
         timer: 1500,
       });
-      
+
       navigate(from, { replace: true });
-      
     } catch (err) {
       console.log(err);
       Swal.fire({

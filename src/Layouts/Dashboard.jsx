@@ -7,13 +7,15 @@ import {
 import Navbar from "@/Pages/Shared/Navbar/Navbar";
 import { AdminSidebar } from "@/components/DashboardSidebar/admin-sidebar";
 import { Outlet } from "react-router-dom";
+import useRole from "@/hooks/useRole";
 
 const Dashboard = () => {
-  const admin = true;
-
+  const [role, isLoading] = useRole();
+  console.log(role);
+ 
   return (
     <SidebarProvider>
-      {admin ? <AdminSidebar /> : <UserSidebar />}
+      {role === 'admin' ? <AdminSidebar /> : <UserSidebar />}
       <SidebarInset>
         <header className="flex items-center gap-2 border-b">
           <SidebarTrigger className="ml-2" />

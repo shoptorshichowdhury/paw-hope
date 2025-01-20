@@ -8,7 +8,7 @@ import { FaGithub, FaGoogle, FaInstagram, FaSpinner } from "react-icons/fa";
 import authImg from "../assets/authentication/auth.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { imageUpload } from "@/api/utils";
+import { imageUpload, saveUser } from "@/api/utils";
 import useAuth from "@/hooks/useAuth";
 import Swal from "sweetalert2";
 import axios from "axios";
@@ -44,12 +44,8 @@ export function RegisterForm({ className, ...props }) {
       const result = await createUser(email, password);
       //2. update photo and name
       await updateUserProfile(name, photoURL);
-      //3. save user in db
-      await axios.post(`${import.meta.env.VITE_API_URL}/users/${email}`, {
-        name: name,
-        email: email,
-        image: photoURL,
-      });
+      //save user info in db
+      await saveUser({ ...result?.user, displayName: name, photoURL });
 
       //show success message
       Swal.fire({
@@ -77,9 +73,9 @@ export function RegisterForm({ className, ...props }) {
   //Handle Google signUp
   const handleGoogleSignIn = async () => {
     try {
-      const { user } = await signInWithGoogle();
-      console.log("Google user", user);
-
+      const data = await signInWithGoogle();
+      //save user info in db
+      await saveUser(data?.user);
       //show success message
       Swal.fire({
         position: "top-end",
@@ -89,7 +85,6 @@ export function RegisterForm({ className, ...props }) {
         timer: 1500,
       });
       navigate("/");
-      
     } catch (err) {
       console.log(err);
       Swal.fire({

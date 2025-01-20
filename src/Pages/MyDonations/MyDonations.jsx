@@ -37,7 +37,6 @@ const MyDonations = () => {
           donationAmount: amount,
           status: "decrease",
         });
-
         Swal.fire({
           position: "top-end",
           icon: "success",

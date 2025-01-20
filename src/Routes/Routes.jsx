@@ -17,6 +17,10 @@ import MyDonations from "@/Pages/MyDonations/MyDonations";
 import AdoptionRequest from "@/Pages/AdoptionRequest/AdoptionRequest";
 import PetUpdate from "@/Pages/PetUpdate/PetUpdate";
 import EditDonationCampaigns from "@/Pages/EditDonationCampaigns/EditDonationCampaigns";
+import AdminRoute from "./AdminRoute";
+import Users from "@/Pages/Users/Users";
+import AllPets from "@/Pages/AllPets/AllPets";
+import AllDonations from "@/Pages/AllDonations/AllDonations";
 
 export const router = createBrowserRouter([
   {
@@ -131,6 +135,37 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AdoptionRequest />
+          </PrivateRoute>
+        ),
+      },
+      //   admin routes
+      {
+        path: "allUsers",
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <Users />
+            </AdminRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "allPets",
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <AllPets />
+            </AdminRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "allDonations",
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <AllDonations />
+            </AdminRoute>
           </PrivateRoute>
         ),
       },

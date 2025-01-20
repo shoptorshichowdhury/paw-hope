@@ -13,13 +13,14 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Check, X } from "lucide-react";
+import Swal from "sweetalert2";
 
 const AdoptionRequest = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
   //get all donation data
-  const { data: adoptionRequest = [] } = useQuery({
+  const { data: adoptionRequest = [], refetch } = useQuery({
     queryKey: ["adoptionRequest", user?.email],
     queryFn: async () => {
       const { data } = await axiosSecure.get(
@@ -29,6 +30,45 @@ const AdoptionRequest = () => {
     },
   });
 
+  //handle accept
+  const handleAccept = async (id) => {
+    try {
+      const { data } = await axiosSecure.patch(`/adopt-pet/${id}`);
+      if (data.modifiedCount) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Pet Adopted Successfully!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  //handle reject
+  const handleReject = async (id) => {
+    try {
+      const { data } = await axiosSecure.delete(
+        `/delete-adoption-request/${id}`
+      );
+      if (data.deletedCount) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Adoption Request Rejected!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        refetch();
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  
   return (
     <section className="w-11/12 mx-auto my-12">
       <Table>
@@ -58,9 +98,21 @@ const AdoptionRequest = () => {
               <TableCell>{request.userInfo.email}</TableCell>
               <TableCell>{request.userInfo.phoneNumber}</TableCell>
               <TableCell>{request.userInfo.address}</TableCell>
-              <TableCell className='space-x-2'>
-                <Button title='accept' className='bg-green-500'><Check /></Button>
-                <Button title='reject' className='bg-red-600'><X /></Button>
+              <TableCell className="space-x-2">
+                <Button
+                  onClick={() => handleAccept(request.petId)}
+                  title="accept"
+                  className="bg-green-500"
+                >
+                  <Check />
+                </Button>
+                <Button
+                  onClick={() => handleReject(request._id)}
+                  title="reject"
+                  className="bg-red-600"
+                >
+                  <X />
+                </Button>
               </TableCell>
             </TableRow>
           ))}
