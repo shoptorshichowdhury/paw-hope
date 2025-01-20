@@ -105,7 +105,7 @@ const AllPets = () => {
               </TableCell>
               <TableCell> {pet?.name}</TableCell>
               <TableCell>{pet?.category}</TableCell>
-              <TableCell className="flex gap-2">
+              <TableCell className="flex gap-2 items-center">
                 <Link to={`/dashboard/petUpdate/${pet?._id}`}>
                   <Button
                     title="update"
