@@ -1,7 +1,7 @@
-# Pet Haven - A Pet Adoption and Donation Platform
+# Paw Hope - A Pet Adoption and Donation Platform
 
 ## Purpose
-Pet Haven is a comprehensive platform that connects pet lovers with pets in need of adoption and provides a platform for creating and supporting donation campaigns for pet welfare. The site facilitates a smooth user experience for both pet adopters and donors while providing admin controls to manage users, pets, and campaigns effectively.
+Paw Hope is a comprehensive platform that connects pet lovers with pets in need of adoption and provides a platform for creating and supporting donation campaigns for pet welfare. The site facilitates a smooth user experience for both pet adopters and donors while providing admin controls to manage users, pets, and campaigns effectively.
 
 ## Live URL
 [PawHope Live Link](https://paw-hope.netlify.app/)
