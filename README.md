@@ -1,4 +1,6 @@
-![App Screenshot](https://i.ibb.co/DsD0cmf/eco-adventure.png) 
+<div align="center">
+  <img height="500" src="https://i.ibb.co.com/jKJNr70/Add-a-heading-1.jpg"  />
+</div>
 
 #  🐾 **Paw Hope**  - A Pet Adoption and Donation Platform
 
