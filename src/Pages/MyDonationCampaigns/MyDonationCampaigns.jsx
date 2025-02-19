@@ -67,7 +67,7 @@ const MyDonationCampaigns = () => {
   if(isLoading) return <Skeleton count={5}></Skeleton>
 
   return (
-    <section className="w-11/12 mx-auto my-12">
+    <section className="my-12">
       <Table>
         <TableHeader>
           <TableRow>

@@ -116,7 +116,7 @@ const AddPet = () => {
   };
 
   return (
-    <section className="w-11/12 lg:max-w-6xl mx-auto my-5">
+    <section className="my-5">
       {/* add pet form */}
       <div>
         <Card className="overflow-hidden">

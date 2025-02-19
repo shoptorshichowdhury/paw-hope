@@ -62,7 +62,7 @@ const MyDonations = () => {
   if (isLoading) return <Skeleton count={5}></Skeleton>;
 
   return (
-    <section className="w-11/12 mx-auto my-12">
+    <section className="my-12">
       <Table>
         <TableHeader>
           <TableRow>
@@ -86,6 +86,8 @@ const MyDonations = () => {
               <TableCell>${donation.donationAmount}</TableCell>
               <TableCell>
                 <Button
+                  variant={`cardBtn`}
+                  size={`sm`}
                   onClick={() =>
                     handleRefund(
                       donation._id,

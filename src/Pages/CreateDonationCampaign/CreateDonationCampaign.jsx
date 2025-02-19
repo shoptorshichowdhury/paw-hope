@@ -75,7 +75,7 @@ const CreateDonationCampaign = () => {
   };
 
   return (
-    <section className="w-11/12 mx-auto my-5">
+    <section className="my-5">
       {/* add pet form */}
       <div>
         <Card className="overflow-hidden">

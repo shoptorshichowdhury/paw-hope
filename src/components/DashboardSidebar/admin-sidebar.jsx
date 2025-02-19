@@ -28,19 +28,23 @@ export function AdminSidebar({ ...props }) {
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
-              {/* 1. my profile */}
+              {/* 1. overview */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <NavLink className="font-medium" to="/myProfile" end>
-                  <User /> My Profile
+                    <ChartLine /> Overview
                   </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
-              {/* 2. overview */}
+              {/* 2. my profile */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <NavLink className="font-medium" to="/myProfile" end>
-                  <ChartLine /> Overview
+                  <NavLink
+                    className="font-medium"
+                    to="/dashboard/myProfile"
+                    end
+                  >
+                    <User /> My Profile
                   </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -104,7 +108,10 @@ export function AdminSidebar({ ...props }) {
               {/* 6. donation request */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <NavLink className="font-medium" to="/dashboard/adoptionRequest">
+                  <NavLink
+                    className="font-medium"
+                    to="/dashboard/adoptionRequest"
+                  >
                     Adoption Request
                   </NavLink>
                 </SidebarMenuButton>

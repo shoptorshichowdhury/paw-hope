@@ -11,11 +11,10 @@ import useRole from "@/hooks/useRole";
 
 const Dashboard = () => {
   const [role, isLoading] = useRole();
-  console.log(role);
  
   return (
     <SidebarProvider>
-      {role === 'admin' ? <AdminSidebar /> : <UserSidebar />}
+      {role === "admin" ? <AdminSidebar /> : <UserSidebar />}
       <SidebarInset>
         <header className="flex items-center gap-2 border-b">
           <SidebarTrigger className="ml-2" />
@@ -25,11 +24,9 @@ const Dashboard = () => {
         </header>
 
         {/* outlet content */}
-        <div className="flex flex-1 flex-col gap-4 p-4">
-          <div>
-            <Outlet></Outlet>
-          </div>
-        </div>
+        <section className="w-11/12 lg:max-w-6xl mx-auto">
+          <Outlet></Outlet>
+        </section>
       </SidebarInset>
     </SidebarProvider>
   );

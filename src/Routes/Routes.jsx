@@ -22,6 +22,7 @@ import Users from "@/Pages/Users/Users";
 import AllPets from "@/Pages/AllPets/AllPets";
 import AllDonations from "@/Pages/AllDonations/AllDonations";
 import ErrorPage from "@/Pages/ErrorPage";
+import MyProfile from "@/Pages/MyProfile/MyProfile";
 
 export const router = createBrowserRouter([
   {
@@ -42,7 +43,7 @@ export const router = createBrowserRouter([
         element: <PetDetails />,
       },
       {
-        path: "/donationCampaigns", 
+        path: "/donationCampaigns",
         element: <DonationCampaigns />,
       },
       {
@@ -75,6 +76,14 @@ export const router = createBrowserRouter([
     ),
     children: [
       // user routes
+      {
+        path: "myProfile",
+        element: (
+          <PrivateRoute>
+            <MyProfile />
+          </PrivateRoute>
+        ),
+      },
       {
         index: true,
         element: (

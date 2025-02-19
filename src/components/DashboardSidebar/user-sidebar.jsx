@@ -28,19 +28,23 @@ export function UserSidebar({ ...props }) {
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
-              {/* 1. my profile */}
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <NavLink className="font-medium" to="/myProfile" end>
-                    <User /> My Profile
-                  </NavLink>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              {/* 2. overview */}
+              {/* 1. overview */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <NavLink className="font-medium" to="/myProfile" end>
                     <ChartLine /> Overview
+                  </NavLink>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              {/* 2. my profile */}
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <NavLink
+                    className="font-medium"
+                    to="/dashboard/myProfile"
+                    end
+                  >
+                    <User /> My Profile
                   </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
