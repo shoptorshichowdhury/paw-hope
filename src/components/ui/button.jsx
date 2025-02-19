@@ -21,7 +21,7 @@ const buttonVariants = cva(
         primary:
           "bg-[#4A90E2] text-primary-foreground hover:bg-[#4A90E2]/90 h-9 rounded-md px-2 md:h-11 md:px-8",
         cardBtn:
-          "bg-[#FF6F61] text-primary-foreground hover:bg-[#FF6F61]/90 h-9 rounded-xl px-2 md:h-11 md:px-5",
+          "bg-[#4A90E2] text-primary-foreground hover:bg-[#4A90E2]/90 rounded-md h-9 px-2 text-sm",
       },
       size: {
         default: "h-10 px-4 py-2",

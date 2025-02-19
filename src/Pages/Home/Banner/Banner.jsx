@@ -4,7 +4,7 @@ import dogImage from "../../../assets/banner/dogbanner.jpg";
 
 const Banner = () => {
   return (
-    <div className="w-11/12 mx-auto">
+    <section>
       <div className="flex flex-col md:flex-row gap-5 md:gap-0 justify-between items-center py-5 md:py-12">
         {/* text content */}
         <div className="md:w-1/2 space-y-5 md:space-y-10 lg:space-y-14">
@@ -51,7 +51,7 @@ const Banner = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

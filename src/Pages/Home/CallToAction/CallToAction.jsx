@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 const CallToAction = () => {
   return (
-    <section className="mt-12 w-11/12 mx-auto md:py-10">
+    <section className="mt-12 md:py-10">
       <div className="flex flex-col md:flex-row items-center gap-10 md:gap-0">
         {/* image section */}
         <div className="md:w-1/2 relative z-10">

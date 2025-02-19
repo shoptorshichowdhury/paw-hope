@@ -6,7 +6,7 @@ import { FaHome } from "react-icons/fa";
 
 const AboutUs = () => {
   return (
-    <section className="mt-12 w-11/12 mx-auto">
+    <section className="mt-12">
       {/* section title */}
       <div className="my-3 md:my-5 lg:my-10  flex justify-center">
         <SectionTitle

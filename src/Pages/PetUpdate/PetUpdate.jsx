@@ -23,39 +23,48 @@ const options = [
   { value: "bird", label: "Bird" },
 ];
 
-//custom select styles
-const customSelectStyles = (theme) => ({
-  control: (base) => ({
-    ...base,
-    backgroundColor: theme === "dark" ? "#000000" : "#fff",
-    borderColor: theme === "dark" ? "#1E293B" : "#ccc",
-    color: theme === "dark" ? "#fff" : "#000",
-  }),
-  option: (base, state) => ({
-    ...base,
-    backgroundColor: state.isSelected
-      ? theme === "dark"
-        ? "#000"
-        : "#ddd"
-      : "transparent",
-    color: theme === "dark" ? "#fff" : "#000",
-    ":hover": {
-      backgroundColor: theme === "dark" ? "#555" : "#eee",
-    },
-  }),
-  menu: (base) => ({
-    ...base,
-    backgroundColor: theme === "dark" ? "#333" : "#fff",
-  }),
-  placeholder: (base) => ({
-    ...base,
-    color: theme === "dark" ? "#ddd" : "#777",
-  }),
-  singleValue: (base) => ({
-    ...base,
-    color: theme === "dark" ? "#fff" : "#000",
-  }),
-});
+// Function to determine if system theme is dark
+const isSystemDark = () => window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+// Custom select styles
+const customSelectStyles = (theme) => {
+  const isDarkMode = theme === "dark" || (theme === "system" && isSystemDark());
+
+  return {
+    control: (base) => ({
+      ...base,
+      backgroundColor: isDarkMode ? "#000000" : "#fff",
+      borderColor: isDarkMode ? "#1E293B" : "#ccc",
+      color: isDarkMode ? "#fff" : "#000",
+    }),
+    option: (base, state) => ({
+      ...base,
+      backgroundColor: state.isSelected
+        ? isDarkMode
+          ? "#000"
+          : "#ddd"
+        : "transparent",
+      color: isDarkMode ? "#fff" : "#000",
+      ":hover": {
+        backgroundColor: isDarkMode ? "#555" : "#eee",
+      },
+    }),
+    menu: (base) => ({
+      ...base,
+      backgroundColor: isDarkMode ? "#333" : "#fff",
+    }),
+    placeholder: (base) => ({
+      ...base,
+      color: isDarkMode ? "#ddd" : "#777",
+    }),
+    singleValue: (base) => ({
+      ...base,
+      color: isDarkMode ? "#fff" : "#000",
+    }),
+  };
+};
+
+
 
 const PetUpdate = () => {
   const axiosSecure = useAxiosSecure();

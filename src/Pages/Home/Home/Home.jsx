@@ -7,7 +7,7 @@ import Testimonial from "../Testimonial/Testimonial";
 
 const Home = () => {
   return (
-    <div>
+    <div className="w-11/12 lg:max-w-6xl mx-auto">
       <Banner></Banner>
       <Category></Category>
       <CallToAction />

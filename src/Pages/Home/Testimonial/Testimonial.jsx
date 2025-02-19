@@ -22,7 +22,7 @@ const Testimonial = () => {
   );
 
   return (
-    <section className="mt-12 lg:mt-20 w-11/12 mx-auto">
+    <section className="mt-12 lg:mt-20">
       <div className="my-3 md:my-5 lg:my-10  flex justify-center">
         <SectionTitle
           subheading={`Testimonial`}

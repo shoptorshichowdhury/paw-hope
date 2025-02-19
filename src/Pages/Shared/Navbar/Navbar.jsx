@@ -25,7 +25,7 @@ const Navbar = () => {
 
   return (
     <div className="sticky top-0 bg-opacity-90 backdrop-blur-md border-b border-b-slate-300/30 dark:border-b-slate-50/10 z-50">
-      <nav className="py-3 w-11/12 mx-auto flex justify-between items-center">
+      <nav className="py-3 w-11/12 lg:max-w-6xl mx-auto flex justify-between items-center">
         {/* logo */}
         <div className="flex items-end gap-2">
           <div className="w-7 h-7 md:w-10 md:h-10">

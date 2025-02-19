@@ -3,7 +3,7 @@ import donateBanner from "../../../assets/home/donate-now/donatebanner2.jpg";
 
 const DonateNow = () => {
   return (
-    <section className="w-11/12 mx-auto my-12 lg:my-20">
+    <section className="my-12 lg:my-20">
       <div
         className="h-[280px] md:h-[400px] lg:h-[480px] bg-cover bg-no-repeat bg-top lg:bg-center bg-neutral-600 bg-blend-overlay rounded-2xl flex justify-center items-start lg:items-center"
         style={{ backgroundImage: `url(${donateBanner})` }}

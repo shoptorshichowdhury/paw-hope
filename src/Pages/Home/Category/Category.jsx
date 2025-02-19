@@ -8,7 +8,7 @@ import SectionTitle from "@/components/common/SectionTitle/SectionTitle";
 
 const Category = () => {
   return (
-    <section className="mt-12 w-11/12 mx-auto">
+    <section className="mt-12">
       <div className="my-5 md:my-8 lg:my-10 flex justify-center items-center">
         <SectionTitle
           heading={`Choose Desire Category`}
