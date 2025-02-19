@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import footerLogo from "../../../../src/assets/icons/bigIcon.png";
+import footerLogo from "../../../../src/assets/icons/paw-hope-logos/logo1.png";
 import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 const Footer = () => {

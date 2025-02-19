@@ -36,7 +36,8 @@ const Banner = () => {
               />
             </div>
             <span className="text-lg md:text-xl lg:text-4xl font-medium text-primaryBlue">
-              12k+ <br />
+              <span>12k+</span> 
+              <br />
               Transaction
             </span>
           </div>
