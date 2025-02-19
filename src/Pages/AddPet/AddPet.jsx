@@ -89,6 +89,7 @@ const AddPet = () => {
     const petData = {
       photo: photoURL,
       name: data?.name,
+      price: parseFloat(data?.price),
       age: data?.age,
       category: data?.category?.value,
       location: data?.location,
@@ -115,7 +116,7 @@ const AddPet = () => {
   };
 
   return (
-    <section className="w-11/12 mx-auto my-5">
+    <section className="w-11/12 lg:max-w-6xl mx-auto my-5">
       {/* add pet form */}
       <div>
         <Card className="overflow-hidden">
@@ -128,22 +129,42 @@ const AddPet = () => {
                     Add a pet for adoption!
                   </p>
                 </div>
-                {/* name */}
-                <div className="grid gap-2">
-                  <Label htmlFor="name">Pet Name</Label>
-                  <Input
-                    id="name"
-                    type="text"
-                    placeholder="Full Name"
-                    className="bg-white dark:bg-black"
-                    {...register("name", { required: true })}
-                    required
-                  />
-                  {errors.name && (
-                    <p className="text-sm text-red-600">
-                      Name field is required.
-                    </p>
-                  )}
+                {/* name & price container */}
+                <div className="grid grid-cols-1 lg:grid-cols-4 gap-2">
+                  {/* name */}
+                  <div className="lg:col-span-2 grid gap-2">
+                    <Label htmlFor="name">Pet Name</Label>
+                    <Input
+                      id="name"
+                      type="text"
+                      placeholder="Full Name"
+                      className="bg-white dark:bg-black"
+                      {...register("name", { required: true })}
+                      required
+                    />
+                    {errors.name && (
+                      <p className="text-sm text-red-600">
+                        Name field is required.
+                      </p>
+                    )}
+                  </div>
+                  {/* fee */}
+                  <div className="lg:col-span-2 grid gap-2">
+                    <Label htmlFor="name">Rehoming Fee</Label>
+                    <Input
+                      id="price"
+                      type="number"
+                      placeholder="Fee"
+                      className="bg-white dark:bg-black"
+                      {...register("price", { required: true })}
+                      required
+                    />
+                    {errors.name && (
+                      <p className="text-sm text-red-600">
+                        Price field is required.
+                      </p>
+                    )}
+                  </div>
                 </div>
                 {/* image & age cotainer */}
                 <div className="grid grid-cols-1 lg:grid-cols-4 gap-2">

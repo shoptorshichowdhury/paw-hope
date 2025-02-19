@@ -22,7 +22,7 @@ const Footer = () => {
               </span>
             </span>
           </div>
-          <div>&copy; 2024 All rights reserved</div>
+          <div>&copy; 2024 All rights reserved | Shoptorshi Chowdhury.</div>
         </div>
         {/* social icons */}
         <div className="space-y-3">

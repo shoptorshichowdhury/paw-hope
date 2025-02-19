@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/sidebar";
 import { NavLink } from "react-router-dom";
 import "./DashboardSidebar.css";
+import { ChartLine, User } from "lucide-react";
 
 export function AdminSidebar({ ...props }) {
   return (
@@ -23,6 +24,32 @@ export function AdminSidebar({ ...props }) {
         </h3>
       </SidebarHeader>
       <SidebarContent className="sidebar">
+        {/* profile & overview */}
+        <SidebarGroup>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {/* 1. my profile */}
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <NavLink className="font-medium" to="/myProfile" end>
+                  <User /> My Profile
+                  </NavLink>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              {/* 2. overview */}
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <NavLink className="font-medium" to="/myProfile" end>
+                  <ChartLine /> Overview
+                  </NavLink>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        <SidebarSeparator className="mx-0" />
+
         {/* additional users route */}
         <SidebarGroup>
           <SidebarGroupContent>

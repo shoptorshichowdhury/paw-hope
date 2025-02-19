@@ -2,6 +2,7 @@ import dogImg from "../../../assets/home/call-to-action/adot-dog.jpg";
 import catImg from "../../../assets/home/call-to-action/adopt-cat.jpg";
 import petCareImg from "../../../assets/home/call-to-action/pet-care.png";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const CallToAction = () => {
   return (
@@ -27,7 +28,11 @@ const CallToAction = () => {
         {/* text section */}
         <div className="md:w-1/2 space-y-3 md:space-y-5 lg:space-y-8">
           <div className="w-10 h-10">
-            <img className="w-full h-full object-cover" src={petCareImg} alt="pet-care-logo" />
+            <img
+              className="w-full h-full object-cover"
+              src={petCareImg}
+              alt="pet-care-logo"
+            />
           </div>
           <h3 className="text-base md:text-2xl lg:text-4xl font-semibold">
             Open Your Heart, Find Your Perfect Companion Today!
@@ -38,7 +43,11 @@ const CallToAction = () => {
             unconditional love and companionship. Start the journey of giving
             them a better tomorrow today!
           </p>
-          <Button variant={`primary`}>Find a Friend</Button>
+          <div>
+            <Link to={`/petListing`}>
+              <Button variant={`primary`}>Find a Friend</Button>
+            </Link>
+          </div>
         </div>
       </div>
     </section>

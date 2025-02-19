@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import catImage from "../../../assets/banner/catbanner.jpg";
 import dogImage from "../../../assets/banner/dogbanner.jpg";
+import { Link } from "react-router-dom";
 
 const Banner = () => {
   return (
@@ -20,7 +21,9 @@ const Banner = () => {
             </p>
           </div>
           <div>
-            <Button variant={`primary`}>Adopt Now</Button>
+            <Link to={`/petListing`}>
+              <Button variant={`primary`}>Adopt Now</Button>
+            </Link>
           </div>
         </div>
 
@@ -32,11 +35,11 @@ const Banner = () => {
               <img
                 className="w-full h-full object-cover rounded-3xl"
                 src={catImage}
-                alt=""
+                alt="cat"
               />
             </div>
             <span className="text-lg md:text-xl lg:text-4xl font-medium text-primaryBlue">
-              <span>12k+</span> 
+              <span>12k+</span>
               <br />
               Transaction
             </span>
@@ -46,7 +49,7 @@ const Banner = () => {
             <img
               className="w-full h-full object-cover rounded-3xl"
               src={dogImage}
-              alt=""
+              alt="dog"
             />
           </div>
         </div>

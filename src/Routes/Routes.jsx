@@ -42,7 +42,7 @@ export const router = createBrowserRouter([
         element: <PetDetails />,
       },
       {
-        path: "/donationCampaigns",
+        path: "/donationCampaigns", 
         element: <DonationCampaigns />,
       },
       {

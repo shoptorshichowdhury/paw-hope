@@ -46,7 +46,8 @@ const DonationCampaigns = () => {
       />
 
       {/* donation campaign container */}
-      <div className="w-11/12 mx-auto my-12 md:my-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
+      <section className="w-11/12 lg:max-w-6xl mx-auto">
+      <div className="my-10 md:my-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 min-h-60">
         {isLoading && <PublicSkeletonCard cards={8}></PublicSkeletonCard>}
         {campaigns &&
           campaigns.map((campaign) => (
@@ -55,6 +56,7 @@ const DonationCampaigns = () => {
 
         {hasNextPage && <div ref={ref} className="h-4 w-full"></div>}
       </div>
+      </section>
     </section>
   );
 };
