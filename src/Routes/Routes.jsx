@@ -23,6 +23,7 @@ import AllPets from "@/Pages/AllPets/AllPets";
 import AllDonations from "@/Pages/AllDonations/AllDonations";
 import ErrorPage from "@/Pages/ErrorPage";
 import MyProfile from "@/Pages/MyProfile/MyProfile";
+import Overview from "@/Pages/Overview/Overview";
 
 export const router = createBrowserRouter([
   {
@@ -86,6 +87,14 @@ export const router = createBrowserRouter([
       },
       {
         index: true,
+        element: (
+          <PrivateRoute>
+            <Overview />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "addPet",
         element: (
           <PrivateRoute>
             <AddPet />

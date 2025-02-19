@@ -31,7 +31,7 @@ export function UserSidebar({ ...props }) {
               {/* 1. overview */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <NavLink className="font-medium" to="/myProfile" end>
+                  <NavLink className="font-medium" to="/dashboard" end>
                     <ChartLine /> Overview
                   </NavLink>
                 </SidebarMenuButton>
@@ -61,7 +61,7 @@ export function UserSidebar({ ...props }) {
               {/* 1. add a pet */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <NavLink className="font-medium" to="/dashboard" end>
+                  <NavLink className="font-medium" to="/dashboard/addPet" end>
                     Add a Pet
                   </NavLink>
                 </SidebarMenuButton>
